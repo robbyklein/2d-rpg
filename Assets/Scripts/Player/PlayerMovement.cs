@@ -1,25 +1,28 @@
+using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
-    enum MovementState {
-        RightIdle,
-        Right,
-        LeftIdle,
-        Left,
-        DownIdle,
-        Down,
-        UpIdle,
-        Up
-    }
+public enum PlayerMovementState {
+    RightIdle,
+    Right,
+    LeftIdle,
+    Left,
+    DownIdle,
+    Down,
+    UpIdle,
+    Up
+}
 
+public class PlayerMovement : MonoBehaviour {
     [SerializeField] private PlayerInputManagerSO inputManager;
     [SerializeField] private float moveSpeed = 10f;
 
     private Rigidbody2D rb;
     private Animator animator;
 
+    public event Action<PlayerMovementState> OnMovementDirectionChange;
+
     private Vector2 movementVector;
-    private MovementState lastMovementState = MovementState.RightIdle;
+    private PlayerMovementState lastMovementState = PlayerMovementState.RightIdle;
 
     private void OnEnable() {
         inputManager.OnMove += HandleOnChange;
@@ -34,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    void Update() {
+    private void Update() {
         Move();
     }
 
@@ -47,67 +50,71 @@ public class PlayerMovement : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
 
             switch (lastMovementState) {
-                case MovementState.Left: {
-                        UpdateAnimationState(MovementState.LeftIdle);
+                case PlayerMovementState.Left: {
+                        UpdateAnimationState(PlayerMovementState.LeftIdle);
                         break;
                     }
-                case MovementState.Up: {
-                        UpdateAnimationState(MovementState.UpIdle);
+                case PlayerMovementState.Up: {
+                        UpdateAnimationState(PlayerMovementState.UpIdle);
                         break;
                     }
-                case MovementState.Down: {
-                        UpdateAnimationState(MovementState.DownIdle);
+                case PlayerMovementState.Down: {
+                        UpdateAnimationState(PlayerMovementState.DownIdle);
                         break;
                     }
                 default: {
-                        UpdateAnimationState(MovementState.RightIdle);
+                        UpdateAnimationState(PlayerMovementState.RightIdle);
                         break;
                     }
             }
         } else if (movementVector.y > 0) {
-            rb.velocity = new Vector2(0, 1);
-            UpdateAnimationState(MovementState.Up);
+            rb.velocity = new Vector2(0, moveSpeed);
+            OnMovementDirectionChange?.Invoke(PlayerMovementState.Up);
+            UpdateAnimationState(PlayerMovementState.Up);
         } else if (movementVector.y < 0) {
-            rb.velocity = new Vector2(0, -1);
-            UpdateAnimationState(MovementState.Down);
+            rb.velocity = new Vector2(0, -moveSpeed);
+            OnMovementDirectionChange?.Invoke(PlayerMovementState.Down);
+            UpdateAnimationState(PlayerMovementState.Down);
         } else if (movementVector.x > 0) {
-            rb.velocity = new Vector2(1, 0);
-            UpdateAnimationState(MovementState.Right);
+            rb.velocity = new Vector2(moveSpeed, 0);
+            OnMovementDirectionChange?.Invoke(PlayerMovementState.Right);
+            UpdateAnimationState(PlayerMovementState.Right);
         } else if (movementVector.x < 0) {
-            rb.velocity = new Vector2(-1, 0);
-            UpdateAnimationState(MovementState.Left);
+            rb.velocity = new Vector2(-moveSpeed, 0);
+            OnMovementDirectionChange?.Invoke(PlayerMovementState.Left);
+            UpdateAnimationState(PlayerMovementState.Left);
         }
     }
 
-    private void UpdateAnimationState(MovementState movementState) {
+    private void UpdateAnimationState(PlayerMovementState movementState) {
         if (lastMovementState == movementState) return;
 
         switch (movementState) {
-            case MovementState.Right: {
+            case PlayerMovementState.Right: {
                     animator.SetInteger("State", 1);
                     break;
                 }
-            case MovementState.LeftIdle: {
+            case PlayerMovementState.LeftIdle: {
                     animator.SetInteger("State", 2);
                     break;
                 }
-            case MovementState.Left: {
+            case PlayerMovementState.Left: {
                     animator.SetInteger("State", 3);
                     break;
                 }
-            case MovementState.DownIdle: {
+            case PlayerMovementState.DownIdle: {
                     animator.SetInteger("State", 4);
                     break;
                 }
-            case MovementState.Down: {
+            case PlayerMovementState.Down: {
                     animator.SetInteger("State", 5);
                     break;
                 }
-            case MovementState.UpIdle: {
+            case PlayerMovementState.UpIdle: {
                     animator.SetInteger("State", 6);
                     break;
                 }
-            case MovementState.Up: {
+            case PlayerMovementState.Up: {
                     animator.SetInteger("State", 7);
                     break;
                 }

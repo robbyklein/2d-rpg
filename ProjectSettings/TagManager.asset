@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Npc
   layers:
   - Default
   - TransparentFX
@@ -44,9 +45,15 @@ TagManager:
   - name: Ground
     uniqueID: 3154211279
     locked: 0
+  - name: Flowers
+    uniqueID: 768414085
+    locked: 0
   - name: Player
     uniqueID: 1048355089
     locked: 0
   - name: Objects
     uniqueID: 3443030083
+    locked: 0
+  - name: NPCs
+    uniqueID: 2992803461
     locked: 0

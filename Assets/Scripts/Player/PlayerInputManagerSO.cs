@@ -7,12 +7,14 @@ public class PlayerInputManagerSO : ScriptableObject {
     private Controls Input;
 
     public event Action<Vector2> OnMove;
+    public event Action OnInteract;
 
     private void OnEnable() {
         Input ??= new Controls();
 
         Input.World.Move.performed += MovementChanged;
         Input.World.Move.canceled += MovementChanged;
+        Input.World.Interact.performed += InteractPerformed;
 
         Input.World.Enable();
     }
@@ -20,11 +22,17 @@ public class PlayerInputManagerSO : ScriptableObject {
     private void OnDisable() {
         Input.World.Move.performed -= MovementChanged;
         Input.World.Move.canceled -= MovementChanged;
+        Input.World.Interact.performed -= InteractPerformed;
+
 
         Input.World.Disable();
     }
 
     private void MovementChanged(InputAction.CallbackContext obj) {
         OnMove?.Invoke(obj.ReadValue<Vector2>());
+    }
+
+    private void InteractPerformed(InputAction.CallbackContext obj) {
+        OnInteract?.Invoke();
     }
 }
