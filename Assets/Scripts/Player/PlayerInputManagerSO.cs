@@ -2,28 +2,40 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerInputActionMap {
+    World,
+    Dialog
+}
+
 [CreateAssetMenu(fileName = "Player Input Manager", menuName = "ScriptableObjects/Managers/PlayerInputManager")]
 public class PlayerInputManagerSO : ScriptableObject {
-    private Controls Input;
+    public Controls Input;
 
     public event Action<Vector2> OnMove;
     public event Action OnInteract;
+    public event Action OnDialogSelect;
 
     private void OnEnable() {
+        Debug.Log("Input enable");
+
         Input ??= new Controls();
 
         Input.World.Move.performed += MovementChanged;
         Input.World.Move.canceled += MovementChanged;
         Input.World.Interact.performed += InteractPerformed;
 
+        Input.Dialog.Select.performed += DialogSelectPerformed;
+
         Input.World.Enable();
     }
+
 
     private void OnDisable() {
         Input.World.Move.performed -= MovementChanged;
         Input.World.Move.canceled -= MovementChanged;
         Input.World.Interact.performed -= InteractPerformed;
 
+        Input.Dialog.Select.performed -= DialogSelectPerformed;
 
         Input.World.Disable();
     }
@@ -34,5 +46,32 @@ public class PlayerInputManagerSO : ScriptableObject {
 
     private void InteractPerformed(InputAction.CallbackContext obj) {
         OnInteract?.Invoke();
+    }
+
+    private void DialogSelectPerformed(InputAction.CallbackContext obj) {
+        OnDialogSelect?.Invoke();
+    }
+
+    public void DisableAllActionMaps() {
+        Input.World.Disable();
+        Input.Dialog.Disable();
+    }
+
+    public void ChangeActionMap(PlayerInputActionMap playerInputActionMap) {
+        // Disable app input maps
+        DisableAllActionMaps();
+
+        // Enable the desired one
+        switch (playerInputActionMap) {
+            case PlayerInputActionMap.Dialog: {
+                    Input.Dialog.Enable();
+                    break;
+                }
+            default: {
+                    Input.World.Enable();
+                    break;
+
+                }
+        }
     }
 }

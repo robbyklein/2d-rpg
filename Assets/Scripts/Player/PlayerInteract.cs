@@ -1,22 +1,22 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour {
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerInputManagerSO inputManager;
     private BoxCollider2D collider2D;
 
-    [SerializeField] private UIDocument uiDocument;
-
     private float interactDistance = 0.5f;
     private PlayerMovementState playerMovementState = PlayerMovementState.Right;
 
     private void OnEnable() {
+        Debug.Log("On enable!");
         inputManager.OnInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
     }
 
     private void OnDisable() {
+        Debug.Log("On disable!");
+
         inputManager.OnInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
     }
@@ -26,15 +26,18 @@ public class PlayerInteract : MonoBehaviour {
     }
 
     private void HandleInteract() {
+        // Check if we hit something
         Vector2 direction = MovementStateToDirection();
         RaycastHit2D hit = Physics2D.Raycast(collider2D.bounds.center, direction, interactDistance);
 
-        Debug.DrawRay(collider2D.bounds.center, direction * interactDistance, Color.red);
+        if (!hit) return;
 
-        if (hit && hit.collider.gameObject.CompareTag("Npc")) {
-            Debug.Log("Hit!" + hit.collider.gameObject.name);
+        // Then do the right thing
+        GameObject gameObject = hit.collider.gameObject;
 
-            uiDocument.enabled = true;
+        if (gameObject.CompareTag("Npc")) {
+            NpcDialog dialog = gameObject.GetComponentInParent<NpcDialog>();
+            dialog?.StartConversation();
         }
     }
 
