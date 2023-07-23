@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class NpcDialog : MonoBehaviour {
-    [SerializeField] List<string> dialogs;
+    [SerializeField] string npcKey;
+    [SerializeField] LanguageSO language;
+    private List<string> dialogs;
     [SerializeField] UIDocument dialogUi;
     [SerializeField] PlayerInputManagerSO playerInputManager;
+
+    string playerLanguage = "es";
 
     VisualElement rootUiElement;
     Label textUiElement;
@@ -16,6 +20,8 @@ public class NpcDialog : MonoBehaviour {
 
     private void OnEnable() {
         playerInputManager.OnDialogSelect += HandleDialogSelect;
+
+        dialogs = language.LanguageDict[playerLanguage][npcKey];
     }
 
     private void OnDisable() {

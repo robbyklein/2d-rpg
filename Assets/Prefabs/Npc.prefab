@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333b6971e05552e4893bec62fcde0cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialog: []
+  language: {fileID: 11400000, guid: 325ba37622beafc45850c637edda40dd, type: 2}
+  dialogs: []
   dialogUi: {fileID: 0}
   playerInputManager: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}

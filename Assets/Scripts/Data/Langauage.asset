@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e6320a08eca01547b23a5a1ead167d2, type: 3}
+  m_Name: Langauage
+  m_EditorClassIdentifier: 
+  language:
+  - Key: en
+    NpcData:
+    - Key: luna
+      Dialog:
+      - Hello!
+    - Key: ludo
+      Dialog:
+      - Hello my friend
+      - How are you doing?
+  - Key: es
+    NpcData:
+    - Key: luna
+      Dialog:
+      - Hola!
+    - Key: ludo
+      Dialog:
+      - Hola mi amigo
+      - Como estas?
