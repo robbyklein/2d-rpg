@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class NpcDialog : MonoBehaviour {
     private List<string> dialogs;
     [SerializeField] UIDocument dialogUi;
     [SerializeField] PlayerInputManagerSO playerInputManager;
+
+    static public event Action<bool> OnBusy;
+    public event Action<string> OnConversationFinished;
 
     string playerLanguage = "es";
 
@@ -57,6 +61,7 @@ public class NpcDialog : MonoBehaviour {
     private void EndConversation() {
         ResetConversation();
         playerInputManager.ChangeActionMap(PlayerInputActionMap.World);
+        OnConversationFinished?.Invoke(npcKey);
     }
 
     private void HandleDialogSelect() {
@@ -74,8 +79,9 @@ public class NpcDialog : MonoBehaviour {
         }
     }
 
-
     IEnumerator SpeakDialog() {
+        OnBusy?.Invoke(true);
+
         // Reset text
         textUiElement.text = "";
 
@@ -90,6 +96,7 @@ public class NpcDialog : MonoBehaviour {
         }
 
         // Enable the dialog input
+        OnBusy?.Invoke(false);
         playerInputManager.ChangeActionMap(PlayerInputActionMap.Dialog);
     }
 }

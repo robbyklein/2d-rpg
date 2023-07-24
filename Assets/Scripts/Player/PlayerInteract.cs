@@ -6,19 +6,23 @@ public class PlayerInteract : MonoBehaviour {
     [SerializeField] private UIDocument interactionDisplay;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerInputManagerSO inputManager;
+
     private BoxCollider2D coll;
 
     private float interactDistance = 0.5f;
     private PlayerMovementState playerMovementState = PlayerMovementState.Right;
+    private bool uiBusy = false;
 
     private void OnEnable() {
         inputManager.OnInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
+        NpcDialog.OnBusy += HandleNpcBusyChange;
     }
 
     private void OnDisable() {
         inputManager.OnInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
+        NpcDialog.OnBusy -= HandleNpcBusyChange;
     }
 
     private void Start() {
@@ -39,9 +43,17 @@ public class PlayerInteract : MonoBehaviour {
 
     private IEnumerator SetInteractDisplay() {
         while (true) {
-            interactionDisplay.enabled = CheckForInteractable();
+            if (!uiBusy) {
+                interactionDisplay.enabled = CheckForInteractable();
+            } else {
+                interactionDisplay.enabled = false;
+            }
+
             yield return new WaitForSeconds(0.1f);
         }
+
+        interactionDisplay.enabled = false;
+
     }
 
     private bool CheckForInteractable() {
@@ -82,5 +94,9 @@ public class PlayerInteract : MonoBehaviour {
 
     private void HandleMovementStateChange(PlayerMovementState state) {
         playerMovementState = state;
+    }
+
+    private void HandleNpcBusyChange(bool busy) {
+        uiBusy = busy;
     }
 }
