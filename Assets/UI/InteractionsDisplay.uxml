@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles.uss?fileID=7433441132597879392&amp;guid=6dd93093f7b9dbe4491f0e56c31bde0e&amp;type=3#Styles" />
+    <ui:VisualElement name="interactions-display" class="interactions-display" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="interactions-display-list" class="interactions-display-list">
+            <ui:VisualElement name="interactions-display-item" class="interactions-display-item">
+                <ui:VisualElement name="interactions-display-item-key" class="interactions-display-item-key">
+                    <ui:Label tabindex="-1" text="E" display-tooltip-when-elided="true" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="Interact" display-tooltip-when-elided="true" name="Label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

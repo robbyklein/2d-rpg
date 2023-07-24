@@ -1,43 +1,69 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour {
+    [SerializeField] private UIDocument interactionDisplay;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerInputManagerSO inputManager;
-    private BoxCollider2D collider2D;
+    private BoxCollider2D coll;
 
     private float interactDistance = 0.5f;
     private PlayerMovementState playerMovementState = PlayerMovementState.Right;
 
     private void OnEnable() {
-        Debug.Log("On enable!");
         inputManager.OnInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
     }
 
     private void OnDisable() {
-        Debug.Log("On disable!");
-
         inputManager.OnInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
     }
 
     private void Start() {
-        collider2D = GetComponent<BoxCollider2D>();
+        coll = GetComponent<BoxCollider2D>();
+
+        StartCoroutine(SetInteractDisplay());
     }
 
     private void HandleInteract() {
+        GameObject hitObject = CheckForHit();
+        if (!hitObject) return;
+
+        if (hitObject.CompareTag("Npc")) {
+            NpcDialog dialog = hitObject.GetComponentInParent<NpcDialog>();
+            dialog?.StartConversation();
+        }
+    }
+
+    private IEnumerator SetInteractDisplay() {
+        while (true) {
+            interactionDisplay.enabled = CheckForInteractable();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private bool CheckForInteractable() {
+        GameObject hitObject = CheckForHit();
+        if (!hitObject) return false;
+
+        if (hitObject.CompareTag("Npc")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private GameObject CheckForHit() {
         // Check if we hit something
         Vector2 direction = MovementStateToDirection();
-        RaycastHit2D hit = Physics2D.Raycast(collider2D.bounds.center, direction, interactDistance);
+        RaycastHit2D hit = Physics2D.Raycast(coll.bounds.center, direction, interactDistance);
 
-        if (!hit) return;
-
-        // Then do the right thing
-        GameObject gameObject = hit.collider.gameObject;
-
-        if (gameObject.CompareTag("Npc")) {
-            NpcDialog dialog = gameObject.GetComponentInParent<NpcDialog>();
-            dialog?.StartConversation();
+        if (!hit) {
+            return null;
+        } else {
+            return hit.collider.gameObject;
         }
     }
 
