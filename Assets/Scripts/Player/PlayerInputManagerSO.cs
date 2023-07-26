@@ -16,8 +16,6 @@ public class PlayerInputManagerSO : ScriptableObject {
     public event Action OnDialogSelect;
 
     private void OnEnable() {
-        Debug.Log("Input enable");
-
         Input ??= new Controls();
 
         Input.World.Move.performed += MovementChanged;

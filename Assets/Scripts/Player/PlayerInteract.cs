@@ -3,31 +3,33 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour {
+    // Components
     [SerializeField] private UIDocument interactionDisplay;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerInputManagerSO inputManager;
-
     private BoxCollider2D coll;
 
+    // Settings
     private float interactDistance = 0.5f;
+
+    // State
     private PlayerMovementState playerMovementState = PlayerMovementState.Right;
     private bool uiBusy = false;
 
     private void OnEnable() {
         inputManager.OnInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
-        NpcDialog.OnBusy += HandleNpcBusyChange;
+        NpcDialog.OnDialogBusy += HandleNpcBusyChange;
     }
 
     private void OnDisable() {
         inputManager.OnInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
-        NpcDialog.OnBusy -= HandleNpcBusyChange;
+        NpcDialog.OnDialogBusy -= HandleNpcBusyChange;
     }
 
     private void Start() {
         coll = GetComponent<BoxCollider2D>();
-
         StartCoroutine(SetInteractDisplay());
     }
 
@@ -51,9 +53,6 @@ public class PlayerInteract : MonoBehaviour {
 
             yield return new WaitForSeconds(0.1f);
         }
-
-        interactionDisplay.enabled = false;
-
     }
 
     private bool CheckForInteractable() {

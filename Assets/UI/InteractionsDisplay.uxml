@@ -6,7 +6,7 @@
                 <ui:VisualElement name="interactions-display-item-key" class="interactions-display-item-key">
                     <ui:Label tabindex="-1" text="E" display-tooltip-when-elided="true" />
                 </ui:VisualElement>
-                <ui:Label tabindex="-1" text="Interact" display-tooltip-when-elided="true" name="Label" />
+                <ui:Label tabindex="-1" text="Interact" display-tooltip-when-elided="true" name="Label" class="interactions-display-item-text" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

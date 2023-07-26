@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles.uss?fileID=7433441132597879392&amp;guid=6dd93093f7b9dbe4491f0e56c31bde0e&amp;type=3#Styles" />
+    <ui:VisualElement name="world-status" class="world-status" style="flex-grow: 1; background-color: rgba(190, 0, 0, 0);">
+        <ui:Label text="Robert" name="world-status-name" class="world-status-name" />
+        <ui:VisualElement name="world-status-health-wrap" class="world-status-health-wrap" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:VisualElement name="world-status-health" class="world-status-health world-status-health-wrap" style="flex-grow: 1; background-color: rgb(0, 0, 0);">
+                <ui:VisualElement name="world-status-health-filled" class="world-status-health-filled" />
+            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="30/30" display-tooltip-when-elided="true" name="world-status-health-text" class="world-status-health-text" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

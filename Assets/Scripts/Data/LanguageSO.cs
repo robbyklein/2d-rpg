@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [System.Serializable]
 struct Language {
     public string Key;
@@ -14,15 +13,16 @@ struct NpcData {
     public List<string> Dialog;
 }
 
-
 [CreateAssetMenu(fileName = "Langauage", menuName = "ScriptableObjects/Data/Language")]
 public class LanguageSO : ScriptableObject {
-    [SerializeField]
-    private List<Language> language;
+    [SerializeField] private List<Language> language;
 
     public Dictionary<string, Dictionary<string, List<string>>> LanguageDict { get; private set; }
 
     void OnEnable() {
+        // For testing
+        PlayerPrefs.SetString("playerLanguage", "en");
+
         LanguageDict = new();
 
         foreach (var lang in language) {
@@ -32,5 +32,10 @@ public class LanguageSO : ScriptableObject {
             }
             LanguageDict[lang.Key] = npcsDict;
         }
+    }
+
+    public List<string> retrieveDialog(string npcKey) {
+        string playerLanguage = PlayerPrefs.GetString("playerLanguage", "en");
+        return LanguageDict[playerLanguage][npcKey];
     }
 }

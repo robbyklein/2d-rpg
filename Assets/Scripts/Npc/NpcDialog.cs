@@ -4,90 +4,130 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NpcDialog : MonoBehaviour {
-    [SerializeField] string npcKey;
-    [SerializeField] LanguageSO language;
-    private List<string> dialogs;
-    [SerializeField] UIDocument dialogUi;
-    [SerializeField] PlayerInputManagerSO playerInputManager;
+public enum DialogState {
+    Idle,
+    Speaking,
+    WaitingForInput
+}
 
-    static public event Action<bool> OnBusy;
+public class NpcDialog : MonoBehaviour {
+    // Components
+    [SerializeField] private LanguageSO language;
+    [SerializeField] private PlayerInputManagerSO playerInputManager;
+    [SerializeField] private UIDocument dialogUi;
+
+    // Settings
+    [SerializeField] private string npcKey;
+
+    // Data
+    private List<string> dialogs;
+
+    // Events
+    static public event Action<bool> OnDialogBusy;
     public event Action<string> OnConversationFinished;
 
-    string playerLanguage = "es";
+    // State
+    private DialogState dialogState = DialogState.Idle;
+    int activeDialogIndex = 0;
 
+    // UI
     VisualElement rootUiElement;
     Label textUiElement;
 
-    bool npcActive = false;
-    int activeDialogIndex = 0;
-
     private void OnEnable() {
         playerInputManager.OnDialogSelect += HandleDialogSelect;
-
-        dialogs = language.LanguageDict[playerLanguage][npcKey];
+        dialogs = language.retrieveDialog(npcKey);
     }
 
     private void OnDisable() {
         playerInputManager.OnDialogSelect -= HandleDialogSelect;
     }
 
-    public void StartConversation() {
-        if (dialogs.Count > 0) {
-            npcActive = true;
+    private void ChangeState(DialogState newState) {
+        dialogState = newState;
 
-            // Show the chat box
-            dialogUi.enabled = true;
+        switch (dialogState) {
+            case DialogState.Speaking:
+                // Let everyone know we're busy
+                OnDialogBusy?.Invoke(true);
 
-            // Get the elements
-            rootUiElement = dialogUi.rootVisualElement;
-            textUiElement = rootUiElement.Query<Label>(className: "dialog-text").First();
+                // Disable all input while speaking
+                playerInputManager.DisableAllActionMaps();
 
-            // Disable input while talking
-            playerInputManager.DisableAllActionMaps();
+                // Type the text in ui
+                StartCoroutine(SpeakDialog());
 
-            // Start the speak coroutine
-            StartCoroutine(SpeakDialog());
+                break;
+            case DialogState.WaitingForInput:
+                // Let everyone know we're not busy
+                OnDialogBusy?.Invoke(false);
+
+                // Enable input
+                playerInputManager.ChangeActionMap(PlayerInputActionMap.Dialog);
+
+                break;
+            default:
+                // Reset state and ui
+                ResetConversation();
+
+                // Enable input
+                playerInputManager.ChangeActionMap(PlayerInputActionMap.World);
+
+                // Let everyone know whos been spoke to
+                OnConversationFinished?.Invoke(npcKey);
+
+                break;
         }
+    }
+
+    public void StartConversation() {
+        if (dialogs.Count == 0) return;
+
+        // Show the text box
+        EnableUI();
+
+        ChangeState(DialogState.Speaking);
+    }
+
+    private void EndConversation() {
+        ChangeState(DialogState.Idle);
     }
 
     private void ResetConversation() {
         textUiElement.text = "";
         activeDialogIndex = 0;
         dialogUi.enabled = false;
-        npcActive = false;
-    }
-
-    private void EndConversation() {
-        ResetConversation();
-        playerInputManager.ChangeActionMap(PlayerInputActionMap.World);
-        OnConversationFinished?.Invoke(npcKey);
     }
 
     private void HandleDialogSelect() {
-        if (!npcActive) return;
+        // Ignore inactive npc's
+        if (dialogState == DialogState.Idle) return;
 
+        // We need to go to the next dialog
         activeDialogIndex++;
 
-        // Disable input while talking
+        // Disable all input till we finish
         playerInputManager.DisableAllActionMaps();
 
-        if (activeDialogIndex == dialogs.Count) {
+        // Is the conversation over?
+        bool shouldEndConversation = activeDialogIndex == dialogs.Count;
+
+        if (shouldEndConversation) {
             EndConversation();
         } else {
-            StartCoroutine(SpeakDialog());
+            ChangeState(DialogState.Speaking);
         }
     }
 
     IEnumerator SpeakDialog() {
-        OnBusy?.Invoke(true);
-
-        // Reset text
+        // Clear the old text
         textUiElement.text = "";
 
-        // Type of the active dialog
-        int letterIndex = 0;
+        // Get the dialog to be spoke
         string dialog = dialogs[activeDialogIndex];
+
+        // Type it
+        int letterIndex = 0;
 
         while (dialog.Length > letterIndex) {
             textUiElement.text += dialog[letterIndex];
@@ -95,8 +135,14 @@ public class NpcDialog : MonoBehaviour {
             yield return new WaitForSeconds(0.05f);
         }
 
-        // Enable the dialog input
-        OnBusy?.Invoke(false);
-        playerInputManager.ChangeActionMap(PlayerInputActionMap.Dialog);
+        // Let everyone know we're done
+        ChangeState(DialogState.WaitingForInput);
+    }
+
+    private void EnableUI() {
+        dialogUi.enabled = true;
+
+        rootUiElement = dialogUi.rootVisualElement;
+        textUiElement = rootUiElement.Query<Label>(className: "dialog-text").First();
     }
 }
