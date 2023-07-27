@@ -19,13 +19,13 @@ public class PlayerInteract : MonoBehaviour {
     private void OnEnable() {
         inputManager.OnInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
-        NpcDialog.OnDialogBusy += HandleNpcBusyChange;
+        EntityDialog.OnDialogBusy += HandleNpcBusyChange;
     }
 
     private void OnDisable() {
         inputManager.OnInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
-        NpcDialog.OnDialogBusy -= HandleNpcBusyChange;
+        EntityDialog.OnDialogBusy -= HandleNpcBusyChange;
     }
 
     private void Start() {
@@ -37,9 +37,11 @@ public class PlayerInteract : MonoBehaviour {
         GameObject hitObject = CheckForHit();
         if (!hitObject) return;
 
-        if (hitObject.CompareTag("Npc")) {
-            NpcDialog dialog = hitObject.GetComponentInParent<NpcDialog>();
-            dialog?.StartConversation();
+        // See if it's interactable
+        IInteractable interactableComponent = hitObject.GetComponent<IInteractable>();
+
+        if (interactableComponent != null) {
+            interactableComponent.OnInteract();
         }
     }
 
@@ -56,14 +58,14 @@ public class PlayerInteract : MonoBehaviour {
     }
 
     private bool CheckForInteractable() {
+        // Check that we hit something
         GameObject hitObject = CheckForHit();
         if (!hitObject) return false;
 
-        if (hitObject.CompareTag("Npc")) {
-            return true;
-        } else {
-            return false;
-        }
+        IInteractable interactable = hitObject.GetComponent<IInteractable>();
+        if (interactable == null) return false;
+
+        return true;
     }
 
     private GameObject CheckForHit() {

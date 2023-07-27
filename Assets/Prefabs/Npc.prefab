@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2341511499275786039}
   - component: {fileID: 6016057400841787527}
   - component: {fileID: 1035459791382383269}
+  - component: {fileID: 5251979020463786013}
   m_Layer: 0
   m_Name: Npc Visual
   m_TagString: Npc
@@ -180,6 +181,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7427573, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5251979020463786013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121251090969601109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333b6971e05552e4893bec62fcde0cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  language: {fileID: 11400000, guid: 325ba37622beafc45850c637edda40dd, type: 2}
+  playerInputManager: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
+  dialogUi: {fileID: 0}
+  npcKey: 
 --- !u!1 &3946744194320102873
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +206,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5684345025900025280}
-  - component: {fileID: 3924208118203391085}
   m_Layer: 0
   m_Name: Npc
   m_TagString: Untagged
@@ -213,19 +229,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3924208118203391085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3946744194320102873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 333b6971e05552e4893bec62fcde0cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  language: {fileID: 11400000, guid: 325ba37622beafc45850c637edda40dd, type: 2}
-  dialogs: []
-  dialogUi: {fileID: 0}
-  playerInputManager: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
