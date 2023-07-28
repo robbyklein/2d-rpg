@@ -36,12 +36,14 @@ public class GameManagerSO : ScriptableObject {
             case GameState.Start:
                 break;
             case GameState.Pause:
+                Time.timeScale = 0f;
                 input.ChangeActionMap(PlayerInputActionMap.Pause);
                 SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
                 break;
             case GameState.Battle:
                 break;
             default: // World
+                Time.timeScale = 1f;
                 SceneManager.UnloadSceneAsync("Pause");
                 input.ChangeActionMap(PlayerInputActionMap.World);
                 break;
