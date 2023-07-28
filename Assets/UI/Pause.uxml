@@ -1,38 +1,41 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles.uss" />
-    <ui:VisualElement class="pause-menu" name="pause-menu">
+    
+    
+    
+    <ui:VisualElement class="fullscreen bg p-5 text-lg" name="pause-menu">
         <!-- columns -->
-        <ui:VisualElement class="pause-menu-flex">
+        <ui:VisualElement class="flex-row flex-1">
             <!-- left -->
-            <ui:VisualElement class="pause-menu-flex-left">
+            <ui:VisualElement class="flex-1">
                 <!-- box -->  
-                <ui:VisualElement class="box">
+                <ui:VisualElement class="box flex-1 pr-10">
                     <!-- Player -->
-                    <ui:VisualElement class="pause-menu-player">
+                    <ui:VisualElement class="flex-row">
                         <!-- player image -->
-                        <ui:VisualElement class="pause-menu-player-image" />
+                        <ui:VisualElement class="pause-player-image" />
 
                         <!-- player text -->
-                        <ui:VisualElement class="pause-menu-player-text">
+                        <ui:VisualElement class="flex-1">
                             <!-- player name -->
-                            <ui:Label text="Robert" class="pause-menu-player-name" />
+                            <ui:Label text="Robert" class="text-2xl mt-2" />
                             
                             <!-- player stat line -->
-                            <ui:VisualElement class="pause-menu-stat-line">
-                                <ui:Label text="Level" class="pause-menu-stat-line-label" />
-                                <ui:Label text="1" class="pause-menu-stat-line-value" />
+                            <ui:VisualElement class="flex-row mt-8">
+                                <ui:Label text="Level" class="flex-1 text-light-blue" />
+                                <ui:Label text="1" class="" />
                             </ui:VisualElement>
 
                              <!-- player stat line -->
-                            <ui:VisualElement class="pause-menu-stat-line">
-                                <ui:Label text="Health" class="pause-menu-stat-line-label" />
-                                <ui:Label text="100/100" class="pause-menu-stat-line-value" />
+                            <ui:VisualElement class="flex-row mt-5">
+                                <ui:Label text="Health" class="flex-1 text-light-blue" />
+                                <ui:Label text="100/100" class="" />
                             </ui:VisualElement>
 
                              <!-- player stat line -->
-                            <ui:VisualElement class="pause-menu-stat-line">
-                                <ui:Label text="Defense" class="pause-menu-stat-line-label" />
-                                <ui:Label text="10" class="pause-menu-stat-line-value" />
+                            <ui:VisualElement class="flex-row mt-5">
+                                <ui:Label text="Defense" class="flex-1 text-light-blue" />
+                                <ui:Label text="10" class="" />
                             </ui:VisualElement>
 
                         </ui:VisualElement>
@@ -41,51 +44,52 @@
             </ui:VisualElement>
             
             <!-- right -->
-            <ui:VisualElement class="pause-menu-flex-right">
+            <ui:VisualElement class="flex-1 ml-5">
                 <!-- box -->
-                <ui:VisualElement class="box first">
+                <ui:VisualElement class="box flex-1">
                     <!-- menu option -->
-                    <ui:VisualElement class="pause-menu-option pause-menu-option--active">
-                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
-                        <ui:Label text="Inventory" class="pause-menu-option-label" />
+                    <ui:VisualElement class="flex-row items-center menu-option menu-option--active">
+                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
+                        <ui:Label text="Inventory" class="ml-5" />
                     </ui:VisualElement>
 
                     <!-- menu option -->
-                    <ui:VisualElement class="pause-menu-option">
-                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
-                        <ui:Label text="Armor" class="pause-menu-option-label" />
+                    <ui:VisualElement class="flex-row items-center mt-6 menu-option">
+                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
+                        <ui:Label text="Equipment" class="ml-5" />
+                    </ui:VisualElement>
+
+
+                    <!-- menu option -->
+                    <ui:VisualElement class="flex-row items-center mt-6 menu-option">
+                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
+                        <ui:Label text="Quit game" class="ml-5" />
                     </ui:VisualElement>
 
                     <!-- menu option -->
-                    <ui:VisualElement class="pause-menu-option">
-                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
-                        <ui:Label text="Quit game" class="pause-menu-option-label" />
-                    </ui:VisualElement>
-
-                    <!-- menu option -->
-                    <ui:VisualElement class="pause-menu-option">
-                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
-                        <ui:Label text="Resume" class="pause-menu-option-label" />
+                    <ui:VisualElement class="flex-row items-center mt-6 menu-option">
+                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
+                        <ui:Label text="Resume" class="ml-5" />
                     </ui:VisualElement>
                 </ui:VisualElement>
 
                 <!-- box -->
-                <ui:VisualElement class="box">
-                    <ui:Label text="Overworld" class="this-is-a-class" />
+                <ui:VisualElement class="box mt-5">
+                    <ui:Label text="Overworld" />
                 </ui:VisualElement>
 
                  <!-- box -->
-                <ui:VisualElement class="box">
+                <ui:VisualElement class="box mt-5">
                     <!-- player stat line -->
-                    <ui:VisualElement class="pause-menu-stat-line pause-menu-stat-line--no-margin">
-                        <ui:Label text="Time" class="pause-menu-stat-line-label" />
-                        <ui:Label text="04:24 PM" class="pause-menu-stat-line-value" />
+                    <ui:VisualElement class="flex-row">
+                        <ui:Label text="Time" class="flex-1 text-light-blue" />
+                        <ui:Label text="04:24 PM" />
                     </ui:VisualElement>
 
                     <!-- player stat line -->
-                    <ui:VisualElement class="pause-menu-stat-line">
-                        <ui:Label text="Gold" class="pause-menu-stat-line-label" />
-                        <ui:Label text="4" class="pause-menu-stat-line-value" />
+                    <ui:VisualElement class="flex-row mt-5">
+                        <ui:Label text="Gold" class="flex-1 text-light-blue" />
+                        <ui:Label text="4" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

@@ -1,3 +1,7 @@
+/*
+    Reset
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -5,59 +9,49 @@
     -unity-font-definition: initial;
 }
 
-.dialog-screen {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 20px;
-}
+/*
+    Boxes
+*/
 
 .box {
     background-color: #5A58B4;
     color: #ffffff;
     text-shadow: 2px 2px 0px #000;
-    padding: 20px 25px;
+    padding: 30px;
     border-width: 3px;
     border-color: #ffffff;
 }
 
-.dialog-box {
-    max-width: 75%;
+.box.box--dialog {
+    padding: 20px 25px;
+    flex-shrink: initial;
+    flex-grow: initial;
 }
 
-.dialog-text {
-    font-size: 20px;
+/*
+    Menus
+*/
+
+.menu-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #FFE142;
+    margin-top: 3px;
+    opacity: 0;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-color: #000000;
 }
 
-.actions-list {
-    bottom: 20px;
-    right: 20px;
+.menu-option--active .menu-indicator {
+    opacity: 1;
 }
 
-.interactions-display {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 20px;
-}
+/*
+    Key
+*/
 
-.interactions-display-list {
-}
-
-.interactions-display-item {
-    font-size: 20px;
-    color: #ffffff;
-    flex-direction: row;
-    align-items: center;
-}
-
-
-.interactions-display-item-key {
-    display: flex;
+.key {
     width: 40px;
     height: 40px;
     background-color: #000000;
@@ -65,169 +59,34 @@
     align-items: center;
     justify-content: center;
     -unity-text-align: middle-center;
-    margin-right: 20px;
 }
 
+/*
+    Progress bar
+*/
 
-.interactions-display-item-text {
-  text-shadow: 2px 2px 0px #000000;
-}
-
-.world-status {
-    padding: 20px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.world-status-name {
-    color: #ffffff;
-    text-shadow: 2px 2px 0px #000000;
-    font-size: 24px;
-}
-
-.world-status-health-wrap {
-    display: flex;
-    max-height: 40px;
-    flex-direction: row;
-    align-items: center;
-} 
-
-.world-status-health {
-    height: 18px;
-    max-height: 18px;
-    width: 160px;
-    max-width: 160px;
+.progress-bar {
+    height: 20px;
+    width: 200px;
     background-color: #000000;
     position: relative;
     border-width: 2px;
     border-color: #ffffff;
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
-.world-status-health-filled {
-    height: 13.5px;
-    max-height: 13.5px;
+.progress-bar-filled {
+    height: 15.5px;
     background-color: #ff0000;
     width: 100%;
     position: absolute;
 }
 
-    .world-status-health-text {
-    margin-left: 16px;
-        color: #ffffff;
-    text-shadow: 2px 2px 0px #000000;
-    font-size: 18px;
-}
+/*
+    Pause
+*/
 
-.battle-menus {
-    padding: 20px;
-    display: flex;
-    justify-content: flex-end;
-    height: 100%;
-}
-
-.battle-menus-flex {
-    flex-direction: row;
-}
-
-.battle-menus-flex-right,
-.battle-menus-flex-left {
-    height: 100%;
-    width: 50%;
-}
-
-.battle-menus-flex-right {
-    margin-left: 20px;
-}
-
-.battle-menus-flex .box {
-    height: 100%;
-}
-
-.battle-menu {
-    align-items: flex-start;
-    padding: 30px;
-}
-
-.battle-menu-option {
-    flex-direction: row;
-    align-items: center;
-}
-
-.battle-menu-option {
-    margin-bottom: 25px;
-}
-
-.battle-menu-option.battle-menu-option--last {
-    margin-bottom: 0;
-}
-
-.battle-menu-option-indicator {
-    width: 10px;
-    max-width: 10px;
-    height: 10px;
-    max-height: 10px;
-    background-color: #ffffff;
-    margin-right: 15px;
-    margin-top: 3px;
-    font-size: 18px;
-    opacity: 0;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-    border-color: #000000;
-}
-
-.battle-menu-option.battle-menu-option--selected .battle-menu-option-indicator {
-    opacity: 1;
-}
-
-    .battle-menu-option-text {
-        font-size: 24px;
-    }
-
-.pause-menu {
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-    background-color: #000000;
-    font-size: 24px;
-}
-
-.pause-menu-flex {
-    flex-direction: row;
-    flex: 1;
-}
-
-.pause-menu-flex-left,
-.pause-menu-flex-right {
-    flex: 1;
-}
-
-.pause-menu-flex-right {
-    margin-left: 20px;
-}
-
-.pause-menu-flex-left .box {
-    flex: 1;
-    padding: 30px;
-} 
-
-.pause-menu-flex-right .box {
-    margin-top: 20px;
-    padding: 30px;
-}
-
-.pause-menu-flex-right .box.first {
-    margin-top: 0;
-    flex: 1; 
-}
-
-.pause-menu-player {
-    flex-direction: row;
-}
-
-.pause-menu-player-image {
+.pause-player-image {
     width: 130px;
     height: 110px;
     margin-top: 5px;
@@ -236,49 +95,165 @@
     background-image: url('project://database/Assets/TopDown 2D RPG BE3/Sprites/PlayerPortrait.png?fileID=2800000&guid=36e2ab1b622ae5d4ca176deb565075fc&type=3#PlayerPortrait');
 }
 
-.pause-menu-player-text {
-    flex: 1;
+    
+/*
+    Utility
+*/
+
+.bg {
+    background-color: #000000;
 }
 
-.pause-menu-player-name {
-    font-size: 36px;
-    margin-bottom: 5px;
+.font-bold {
+    -unity-font: url("project://database/Assets/Fonts/pixelmix_bold.ttf");
 }
 
-.pause-menu-stat-line {
-    flex-direction: row;
-    width: 100%;
+.p-5 {
+    padding: 20px;
+}
+
+.pr-10 {
+    padding-right: 40px;
+}
+
+
+.ml-5 {
+    margin-left: 20px;
+}
+
+.ml-6 {
+    margin-left: 24px;
+}
+
+.ml-7 {
+    margin-left: 28px;
+}
+
+.ml-8 {
+    margin-left: 32px;
+}
+
+.mt-2 {
+    margin-top: 8px;
+}
+
+.mt-3 {
+    margin-top: 12px;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.mt-5 {
     margin-top: 20px;
 }
 
-.pause-menu-stat-line--no-margin {
-    margin-top: 0;
+.mt-6 {
+    margin-top: 24px;
 }
 
-.pause-menu-stat-line-label {
-    flex: 1;
-        color: #C3DBFF;
-
+.mt-7 {
+    margin-top: 28px;
 }
 
-.pause-menu-stat-line-value {
+.mt-8 {
+    margin-top: 32px;
 }
 
-.pause-menu-option {
-    flex-direction: row;
+.fullscreen {
+    width: 100%;
+    height: 100%;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-center {
     align-items: center;
-    margin-bottom: 20px;
 }
 
-.pause-menu-option-indicator {
-    width: 8px;
-    height: 8px;
-    background-color: #FFE142;
-    margin-right: 16px;
-    margin-top: 2px;
-    opacity: 0;
+.items-end {
+    align-items: flex-end;
 }
 
-.pause-menu-option.pause-menu-option--active .pause-menu-option-indicator {
-    opacity: 1;
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.max-w-75p {
+    max-width: 75%;
+}
+
+.text-xs {
+    font-size: 16px;
+}
+
+.text-sm {
+    font-size: 18px;
+}
+
+.text-base {
+    font-size: 20px;
+}
+
+.text-lg {
+    font-size: 24px;
+}
+
+.text-xl {
+    font-size: 28px;
+}
+
+.text-2xl {
+    font-size: 32px;
+}
+
+.text-3xl {
+    font-size: 36px;
+}
+
+.text-4xl {
+    font-size: 40px;
+}
+
+.text-5xl {
+    font-size: 44px;
+}
+
+.text-6xl {
+    font-size: 48px;
+}
+
+.text-7xl {
+    font-size: 48px;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 0px #000000;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.text-light-blue {
+    color: #C3DBFF;
 }

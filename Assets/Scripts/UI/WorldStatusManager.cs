@@ -16,7 +16,7 @@ public class WorldStatusManager : MonoBehaviour {
         uiDocument = GetComponent<UIDocument>();
 
         rootUiElement = uiDocument.rootVisualElement;
-        barFilledElement = rootUiElement.Q(name: "world-status-health-filled");
+        barFilledElement = rootUiElement.Q(name: "world-status-filled");
         healthLabel = (Label)rootUiElement.Q(name: "world-status-health-text");
 
         // Set initial health
