@@ -1,0 +1,94 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles.uss" />
+    <ui:VisualElement class="pause-menu" name="pause-menu">
+        <!-- columns -->
+        <ui:VisualElement class="pause-menu-flex">
+            <!-- left -->
+            <ui:VisualElement class="pause-menu-flex-left">
+                <!-- box -->  
+                <ui:VisualElement class="box">
+                    <!-- Player -->
+                    <ui:VisualElement class="pause-menu-player">
+                        <!-- player image -->
+                        <ui:VisualElement class="pause-menu-player-image" />
+
+                        <!-- player text -->
+                        <ui:VisualElement class="pause-menu-player-text">
+                            <!-- player name -->
+                            <ui:Label text="Robert" class="pause-menu-player-name" />
+                            
+                            <!-- player stat line -->
+                            <ui:VisualElement class="pause-menu-stat-line">
+                                <ui:Label text="Level" class="pause-menu-stat-line-label" />
+                                <ui:Label text="1" class="pause-menu-stat-line-value" />
+                            </ui:VisualElement>
+
+                             <!-- player stat line -->
+                            <ui:VisualElement class="pause-menu-stat-line">
+                                <ui:Label text="Health" class="pause-menu-stat-line-label" />
+                                <ui:Label text="100/100" class="pause-menu-stat-line-value" />
+                            </ui:VisualElement>
+
+                             <!-- player stat line -->
+                            <ui:VisualElement class="pause-menu-stat-line">
+                                <ui:Label text="Defense" class="pause-menu-stat-line-label" />
+                                <ui:Label text="10" class="pause-menu-stat-line-value" />
+                            </ui:VisualElement>
+
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            
+            <!-- right -->
+            <ui:VisualElement class="pause-menu-flex-right">
+                <!-- box -->
+                <ui:VisualElement class="box first">
+                    <!-- menu option -->
+                    <ui:VisualElement class="pause-menu-option pause-menu-option--active">
+                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
+                        <ui:Label text="Inventory" class="pause-menu-option-label" />
+                    </ui:VisualElement>
+
+                    <!-- menu option -->
+                    <ui:VisualElement class="pause-menu-option">
+                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
+                        <ui:Label text="Armor" class="pause-menu-option-label" />
+                    </ui:VisualElement>
+
+                    <!-- menu option -->
+                    <ui:VisualElement class="pause-menu-option">
+                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
+                        <ui:Label text="Quit game" class="pause-menu-option-label" />
+                    </ui:VisualElement>
+
+                    <!-- menu option -->
+                    <ui:VisualElement class="pause-menu-option">
+                        <ui:VisualElement class="pause-menu-option-indicator"></ui:VisualElement>
+                        <ui:Label text="Resume" class="pause-menu-option-label" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- box -->
+                <ui:VisualElement class="box">
+                    <ui:Label text="Overworld" class="this-is-a-class" />
+                </ui:VisualElement>
+
+                 <!-- box -->
+                <ui:VisualElement class="box">
+                    <!-- player stat line -->
+                    <ui:VisualElement class="pause-menu-stat-line pause-menu-stat-line--no-margin">
+                        <ui:Label text="Time" class="pause-menu-stat-line-label" />
+                        <ui:Label text="04:24 PM" class="pause-menu-stat-line-value" />
+                    </ui:VisualElement>
+
+                    <!-- player stat line -->
+                    <ui:VisualElement class="pause-menu-stat-line">
+                        <ui:Label text="Gold" class="pause-menu-stat-line-label" />
+                        <ui:Label text="4" class="pause-menu-stat-line-value" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

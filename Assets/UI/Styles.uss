@@ -105,13 +105,11 @@
     margin-top: 2px;
 }
 
-
-
 .world-status-health-filled {
     height: 13.5px;
     max-height: 13.5px;
     background-color: #ff0000;
-    width: 20%;
+    width: 100%;
     position: absolute;
 }
 
@@ -187,3 +185,100 @@
     .battle-menu-option-text {
         font-size: 24px;
     }
+
+.pause-menu {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    background-color: #000000;
+    font-size: 24px;
+}
+
+.pause-menu-flex {
+    flex-direction: row;
+    flex: 1;
+}
+
+.pause-menu-flex-left,
+.pause-menu-flex-right {
+    flex: 1;
+}
+
+.pause-menu-flex-right {
+    margin-left: 20px;
+}
+
+.pause-menu-flex-left .box {
+    flex: 1;
+    padding: 30px;
+} 
+
+.pause-menu-flex-right .box {
+    margin-top: 20px;
+    padding: 30px;
+}
+
+.pause-menu-flex-right .box.first {
+    margin-top: 0;
+    flex: 1; 
+}
+
+.pause-menu-player {
+    flex-direction: row;
+}
+
+.pause-menu-player-image {
+    width: 130px;
+    height: 110px;
+    margin-top: 5px;
+    background-size: auto 100%;
+    background-position: left center;
+    background-image: url('project://database/Assets/TopDown 2D RPG BE3/Sprites/PlayerPortrait.png?fileID=2800000&guid=36e2ab1b622ae5d4ca176deb565075fc&type=3#PlayerPortrait');
+}
+
+.pause-menu-player-text {
+    flex: 1;
+}
+
+.pause-menu-player-name {
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+
+.pause-menu-stat-line {
+    flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.pause-menu-stat-line--no-margin {
+    margin-top: 0;
+}
+
+.pause-menu-stat-line-label {
+    flex: 1;
+        color: #C3DBFF;
+
+}
+
+.pause-menu-stat-line-value {
+}
+
+.pause-menu-option {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pause-menu-option-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: #FFE142;
+    margin-right: 16px;
+    margin-top: 2px;
+    opacity: 0;
+}
+
+.pause-menu-option.pause-menu-option--active .pause-menu-option-indicator {
+    opacity: 1;
+}

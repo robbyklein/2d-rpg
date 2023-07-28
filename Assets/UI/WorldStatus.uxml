@@ -6,7 +6,7 @@
             <ui:VisualElement name="world-status-health" class="world-status-health world-status-health-wrap" style="flex-grow: 1; background-color: rgb(0, 0, 0);">
                 <ui:VisualElement name="world-status-health-filled" class="world-status-health-filled" />
             </ui:VisualElement>
-            <ui:Label tabindex="-1" text="30/30" display-tooltip-when-elided="true" name="world-status-health-text" class="world-status-health-text" />
+            <ui:Label tabindex="-1" text="100/100" display-tooltip-when-elided="true" name="world-status-health-text" class="world-status-health-text" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

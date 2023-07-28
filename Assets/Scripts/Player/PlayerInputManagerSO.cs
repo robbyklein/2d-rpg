@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 
 public enum PlayerInputActionMap {
     World,
-    Dialog
+    Dialog,
+    Pause,
 }
 
 [CreateAssetMenu(fileName = "Player Input Manager", menuName = "ScriptableObjects/Managers/PlayerInputManager")]
@@ -14,6 +15,8 @@ public class PlayerInputManagerSO : ScriptableObject {
     public event Action<Vector2> OnMove;
     public event Action OnInteract;
     public event Action OnDialogSelect;
+    public event Action OnPause;
+    public event Action OnResume;
 
     private void OnEnable() {
         Input ??= new Controls();
@@ -21,19 +24,24 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.World.Move.performed += MovementChanged;
         Input.World.Move.canceled += MovementChanged;
         Input.World.Interact.performed += InteractPerformed;
+        Input.World.Pause.performed += PausePerformed;
 
         Input.Dialog.Select.performed += DialogSelectPerformed;
 
+        Input.Pause.Resume.performed += ResumePerformed;
+
         Input.World.Enable();
     }
-
 
     private void OnDisable() {
         Input.World.Move.performed -= MovementChanged;
         Input.World.Move.canceled -= MovementChanged;
         Input.World.Interact.performed -= InteractPerformed;
+        Input.World.Pause.performed -= PausePerformed;
 
         Input.Dialog.Select.performed -= DialogSelectPerformed;
+
+        Input.Pause.Resume.performed -= ResumePerformed;
 
         Input.World.Disable();
     }
@@ -50,6 +58,14 @@ public class PlayerInputManagerSO : ScriptableObject {
         OnDialogSelect?.Invoke();
     }
 
+    private void PausePerformed(InputAction.CallbackContext context) {
+        OnPause?.Invoke();
+    }
+
+    private void ResumePerformed(InputAction.CallbackContext context) {
+        OnResume?.Invoke();
+    }
+
     public void DisableAllActionMaps() {
         Input.World.Disable();
         Input.Dialog.Disable();
@@ -61,15 +77,16 @@ public class PlayerInputManagerSO : ScriptableObject {
 
         // Enable the desired one
         switch (playerInputActionMap) {
-            case PlayerInputActionMap.Dialog: {
-                    Input.Dialog.Enable();
-                    break;
-                }
-            default: {
-                    Input.World.Enable();
-                    break;
+            case PlayerInputActionMap.Dialog:
+                Input.Dialog.Enable();
+                break;
+            case PlayerInputActionMap.Pause:
+                Input.Pause.Enable();
+                break;
+            default:
+                Input.World.Enable();
+                break;
 
-                }
         }
     }
 }
