@@ -169,6 +169,10 @@
     margin-top: 32px;
 }
 
+.mt-auto {
+    margin-top: auto;
+}
+
 .fullscreen {
     width: 100%;
     height: 100%;

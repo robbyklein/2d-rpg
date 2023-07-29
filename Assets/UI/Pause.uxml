@@ -29,13 +29,13 @@
                              <!-- player stat line -->
                             <ui:VisualElement class="flex-row mt-5">
                                 <ui:Label text="Health" class="flex-1 text-light-blue" />
-                                <ui:Label text="100/100" class="" />
+                                <ui:Label name="pause-player-health-text" text="100/100" class="" />
                             </ui:VisualElement>
 
                              <!-- player stat line -->
                             <ui:VisualElement class="flex-row mt-5">
                                 <ui:Label text="Defense" class="flex-1 text-light-blue" />
-                                <ui:Label text="10" class="" />
+                                <ui:Label name="pause-player-defense-text" text="10" class="" />
                             </ui:VisualElement>
 
                         </ui:VisualElement>
@@ -61,7 +61,6 @@
                             <ui:VisualElement class="menu-indicator"></ui:VisualElement>
                             <ui:Label text="Equipment" class="ml-5" />
                         </ui:VisualElement>
-
 
                         <!-- menu option -->
                         <ui:VisualElement name="pause-quit" class="flex-row items-center mt-6 menu-option">
@@ -99,24 +98,28 @@
 
                 <!-- inventory menu -->
                 <ui:VisualElement class="menu menu--inventory box flex-1">
-                    <!-- menu option -->
-                    <ui:VisualElement name="pause-inventory" class="flex-row items-center menu-option menu-option--active">
-                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
-                        <ui:Label text="Potion" class="ml-5" />
+                    <ui:VisualElement name="pause-inventory-items" class="flex-1">
                     </ui:VisualElement>
 
                     <!-- menu option -->
-                    <ui:VisualElement name="pause-inventory" class="flex-row items-center menu-option mt-6">
+                    <ui:VisualElement class="flex-row items-center menu-option mt-auto">
                         <ui:VisualElement class="menu-indicator"></ui:VisualElement>
-                        <ui:Label text="Potion" class="ml-5" />
-                    </ui:VisualElement>
-
-                    <!-- menu option -->
-                    <ui:VisualElement name="pause-inventory" class="flex-row items-center menu-option mt-6">
-                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
-                        <ui:Label text="Potion" class="ml-5" />
+                        <ui:Label text="Main menu" class="ml-5" />
                     </ui:VisualElement>
                 </ui:VisualElement>
+
+                <!-- Equipment menu -->
+                <ui:VisualElement class="menu menu--equipment box flex-1">
+                    <ui:VisualElement class="flex-1"></ui:VisualElement>
+
+                    <!-- menu option -->
+                    <ui:VisualElement class="flex-row items-center menu-option menu-option--active mt-auto">
+                        <ui:VisualElement class="menu-indicator"></ui:VisualElement>
+                        <ui:Label text="Main menu" class="ml-5" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+
              </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

@@ -17,13 +17,13 @@ public class PlayerInteract : MonoBehaviour {
     private bool uiBusy = false;
 
     private void OnEnable() {
-        inputManager.OnInteract += HandleInteract;
+        inputManager.OnWorldInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
         EntityDialog.OnDialogBusy += HandleNpcBusyChange;
     }
 
     private void OnDisable() {
-        inputManager.OnInteract -= HandleInteract;
+        inputManager.OnWorldInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
         EntityDialog.OnDialogBusy -= HandleNpcBusyChange;
     }

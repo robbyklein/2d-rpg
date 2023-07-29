@@ -12,14 +12,16 @@ public enum PlayerInputActionMap {
 public class PlayerInputManagerSO : ScriptableObject {
     public Controls Input;
 
-    public event Action<Vector2> OnMove;
-    public event Action OnInteract;
+    public event Action<Vector2> OnWorldMove;
+    public event Action OnWorldInteract;
+    public event Action OnWorldPause;
+
     public event Action OnDialogSelect;
-    public event Action OnPause;
-    public event Action OnResume;
-    public event Action OnUp;
-    public event Action OnDown;
-    public event Action OnSelect;
+
+    public event Action OnPauseResume;
+    public event Action OnPauseUp;
+    public event Action OnPauseDown;
+    public event Action OnPauseSelect;
 
     private void OnEnable() {
         Input ??= new Controls();
@@ -57,11 +59,11 @@ public class PlayerInputManagerSO : ScriptableObject {
     }
 
     private void MovementChanged(InputAction.CallbackContext obj) {
-        OnMove?.Invoke(obj.ReadValue<Vector2>());
+        OnWorldMove?.Invoke(obj.ReadValue<Vector2>());
     }
 
     private void InteractPerformed(InputAction.CallbackContext obj) {
-        OnInteract?.Invoke();
+        OnWorldInteract?.Invoke();
     }
 
     private void DialogSelectPerformed(InputAction.CallbackContext obj) {
@@ -69,23 +71,23 @@ public class PlayerInputManagerSO : ScriptableObject {
     }
 
     private void PausePerformed(InputAction.CallbackContext context) {
-        OnPause?.Invoke();
+        OnWorldPause?.Invoke();
     }
 
     private void ResumePerformed(InputAction.CallbackContext context) {
-        OnResume?.Invoke();
+        OnPauseResume?.Invoke();
     }
 
     private void DownPerformed(InputAction.CallbackContext context) {
-        OnDown?.Invoke();
+        OnPauseDown?.Invoke();
     }
 
     private void UpPerformed(InputAction.CallbackContext context) {
-        OnUp?.Invoke();
+        OnPauseUp?.Invoke();
     }
 
     private void SelectPerformed(InputAction.CallbackContext context) {
-        OnSelect?.Invoke();
+        OnPauseSelect?.Invoke();
     }
 
     public void DisableAllActionMaps() {

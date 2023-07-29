@@ -247,3 +247,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
   gameManager: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
+  inventory: {fileID: 11400000, guid: 4935706917a6b5f45a1992b4213a69cc, type: 2}
+  stats: {fileID: 11400000, guid: 71e0adebd7f28bb4b9f1c5a37987b065, type: 2}

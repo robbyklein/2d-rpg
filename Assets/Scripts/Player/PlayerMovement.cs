@@ -25,11 +25,11 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerMovementState lastMovementState = PlayerMovementState.RightIdle;
 
     private void OnEnable() {
-        inputManager.OnMove += HandleOnChange;
+        inputManager.OnWorldMove += HandleOnChange;
     }
 
     private void OnDisable() {
-        inputManager.OnMove -= HandleOnChange;
+        inputManager.OnWorldMove -= HandleOnChange;
     }
 
     private void Start() {

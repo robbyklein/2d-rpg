@@ -10,17 +10,17 @@ public enum GameState {
 
 [CreateAssetMenu(fileName = "Game Manager", menuName = "ScriptableObjects/Managers/GameManager")]
 public class GameManagerSO : ScriptableObject {
-    private GameState gameState = GameState.World; // While deving
+    //private GameState gameState = GameState.World; // While deving
     [SerializeField] private PlayerInputManagerSO input;
 
     private void OnEnable() {
-        input.OnPause += HandlePause;
-        input.OnResume += HandleResume;
+        input.OnWorldPause += HandlePause;
+        input.OnPauseResume += HandleResume;
     }
 
     private void OnDisable() {
-        input.OnPause -= HandlePause;
-        input.OnResume -= HandleResume;
+        input.OnWorldPause -= HandlePause;
+        input.OnPauseResume -= HandleResume;
     }
 
     private void HandleResume() {

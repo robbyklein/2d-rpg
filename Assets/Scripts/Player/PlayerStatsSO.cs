@@ -1,23 +1,39 @@
 using System;
 using UnityEngine;
 
+public struct PlayerStats {
+    public float MaxHealth;
+    public float Health;
+    public float Defense;
+}
+
 [CreateAssetMenu(fileName = "Player Stats Manager", menuName = "ScriptableObjects/Managers/PlayerStatsManager")]
 public class PlayerStatsSO : ScriptableObject {
-    public int maxHealth { get; private set; } = 100;
-    public int health { get; private set; } = 100;
-    private float defense = 0.1f;
+    // Stats
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float health = 40f;
+    [SerializeField] private float defense = 0.1f;
 
-    public event Action<int> OnPlayerHealthChange;
+    // Events
+    public event Action<PlayerStats> OnPlayerStatsChange;
 
-    private void OnEnable() {
-        OnPlayerHealthChange?.Invoke(health);
+    private PlayerStats CreatePlayerStats() {
+        return new PlayerStats {
+            MaxHealth = this.maxHealth,
+            Health = this.health,
+            Defense = this.defense * 100
+        };
+    }
+
+    public PlayerStats PlayerStats() {
+        return CreatePlayerStats();
     }
 
     public void TakeDamage(int damage) {
         float targetAmount = damage * (1 - defense);
-        health = Mathf.RoundToInt(targetAmount);
+        health = Mathf.Round(targetAmount);
 
-        OnPlayerHealthChange?.Invoke(health);
+        OnPlayerStatsChange?.Invoke(CreatePlayerStats());
     }
     public void Heal(int healAmount) {
         float targetAmount = health + healAmount;
@@ -28,6 +44,6 @@ public class PlayerStatsSO : ScriptableObject {
             health = Mathf.RoundToInt(health);
         }
 
-        OnPlayerHealthChange?.Invoke(health);
+        OnPlayerStatsChange?.Invoke(CreatePlayerStats());
     }
 }

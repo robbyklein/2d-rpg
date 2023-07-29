@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3f7fb9b63ed0944a62c28b1f1247a2, type: 3}
-  m_Name: Player Stats Manager
+  m_Script: {fileID: 11500000, guid: 73843ea08dda77743a7dc33afe720627, type: 3}
+  m_Name: Player Inventory Manager
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 44
-  defense: 0.1
+  stats: {fileID: 11400000, guid: 71e0adebd7f28bb4b9f1c5a37987b065, type: 2}

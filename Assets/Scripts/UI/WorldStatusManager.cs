@@ -12,20 +12,29 @@ public class WorldStatusManager : MonoBehaviour {
 
     // Start is called before the first frame update
     private void OnEnable() {
+        // Subscribe to changes
+        playerStats.OnPlayerStatsChange += HandlePlayerStatsChange;
+
         // UI doc / elements
         uiDocument = GetComponent<UIDocument>();
-
         rootUiElement = uiDocument.rootVisualElement;
         barFilledElement = rootUiElement.Q(name: "world-status-filled");
         healthLabel = (Label)rootUiElement.Q(name: "world-status-health-text");
 
         // Set initial health
-        healthLabel.text = $"{playerStats.health}/{playerStats.maxHealth}";
-        barFilledElement.style.width = new Length(playerStats.health / playerStats.maxHealth * 100, LengthUnit.Percent);
+        UpdateUi(playerStats.PlayerStats());
     }
 
-    // Update is called once per frame
-    void Update() {
+    private void UpdateUi(PlayerStats stats) {
+        healthLabel.text = $"{stats.Health}/{stats.MaxHealth}";
+        barFilledElement.style.width = new Length(stats.Health / stats.MaxHealth * 100, LengthUnit.Percent);
+    }
 
+    private void OnDisable() {
+        playerStats.OnPlayerStatsChange -= HandlePlayerStatsChange;
+    }
+
+    private void HandlePlayerStatsChange(PlayerStats stats) {
+        UpdateUi(stats);
     }
 }
