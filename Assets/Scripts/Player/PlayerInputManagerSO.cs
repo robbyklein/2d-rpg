@@ -17,6 +17,9 @@ public class PlayerInputManagerSO : ScriptableObject {
     public event Action OnDialogSelect;
     public event Action OnPause;
     public event Action OnResume;
+    public event Action OnUp;
+    public event Action OnDown;
+    public event Action OnSelect;
 
     private void OnEnable() {
         Input ??= new Controls();
@@ -29,9 +32,13 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Dialog.Select.performed += DialogSelectPerformed;
 
         Input.Pause.Resume.performed += ResumePerformed;
+        Input.Pause.Select.performed += SelectPerformed;
+        Input.Pause.Up.performed += UpPerformed;
+        Input.Pause.Down.performed += DownPerformed;
 
         Input.World.Enable();
     }
+
 
     private void OnDisable() {
         Input.World.Move.performed -= MovementChanged;
@@ -42,6 +49,9 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Dialog.Select.performed -= DialogSelectPerformed;
 
         Input.Pause.Resume.performed -= ResumePerformed;
+        Input.Pause.Select.performed -= SelectPerformed;
+        Input.Pause.Up.performed -= UpPerformed;
+        Input.Pause.Down.performed -= DownPerformed;
 
         Input.World.Disable();
     }
@@ -64,6 +74,18 @@ public class PlayerInputManagerSO : ScriptableObject {
 
     private void ResumePerformed(InputAction.CallbackContext context) {
         OnResume?.Invoke();
+    }
+
+    private void DownPerformed(InputAction.CallbackContext context) {
+        OnDown?.Invoke();
+    }
+
+    private void UpPerformed(InputAction.CallbackContext context) {
+        OnUp?.Invoke();
+    }
+
+    private void SelectPerformed(InputAction.CallbackContext context) {
+        OnSelect?.Invoke();
     }
 
     public void DisableAllActionMaps() {

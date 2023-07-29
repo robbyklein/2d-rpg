@@ -31,7 +31,7 @@ public class GameManagerSO : ScriptableObject {
         ChangeGameState(GameState.Pause);
     }
 
-    private void ChangeGameState(GameState state) {
+    public void ChangeGameState(GameState state) {
         switch (state) {
             case GameState.Start:
                 break;
