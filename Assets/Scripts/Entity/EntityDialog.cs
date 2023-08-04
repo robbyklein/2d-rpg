@@ -118,7 +118,8 @@ public class EntityDialog : MonoBehaviour, IInteractable {
 
         if (shouldEndConversation) {
             EndConversation();
-        } else {
+        }
+        else {
             ChangeState(DialogState.Speaking);
         }
     }
@@ -147,7 +148,7 @@ public class EntityDialog : MonoBehaviour, IInteractable {
         dialogUi.enabled = true;
 
         rootUiElement = dialogUi.rootVisualElement;
-        textUiElement = rootUiElement.Query<Label>(className: "dialog-text").First();
+        textUiElement = rootUiElement.Q<Label>(name: "dialog-text");
     }
 
 }

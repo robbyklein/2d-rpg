@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerInteract : MonoBehaviour {
+public class PlayerInteract : MonoBehaviour
+{
     // Components
     [SerializeField] private UIDocument interactionDisplay;
     [SerializeField] private PlayerMovement playerMovement;
@@ -16,40 +17,50 @@ public class PlayerInteract : MonoBehaviour {
     private PlayerMovementState playerMovementState = PlayerMovementState.Right;
     private bool uiBusy = false;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         inputManager.OnWorldInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
         EntityDialog.OnDialogBusy += HandleNpcBusyChange;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         inputManager.OnWorldInteract -= HandleInteract;
         playerMovement.OnMovementDirectionChange -= HandleMovementStateChange;
         EntityDialog.OnDialogBusy -= HandleNpcBusyChange;
     }
 
-    private void Start() {
+    private void Start()
+    {
         coll = GetComponent<BoxCollider2D>();
         StartCoroutine(SetInteractDisplay());
     }
 
-    private void HandleInteract() {
+    private void HandleInteract()
+    {
         GameObject hitObject = CheckForHit();
         if (!hitObject) return;
 
         // See if it's interactable
         IInteractable interactableComponent = hitObject.GetComponent<IInteractable>();
 
-        if (interactableComponent != null) {
+        if (interactableComponent != null)
+        {
             interactableComponent.OnInteract();
         }
     }
 
-    private IEnumerator SetInteractDisplay() {
-        while (true) {
-            if (!uiBusy) {
+    private IEnumerator SetInteractDisplay()
+    {
+        while (true)
+        {
+            if (!uiBusy)
+            {
                 interactionDisplay.enabled = CheckForInteractable();
-            } else {
+            }
+            else
+            {
                 interactionDisplay.enabled = false;
             }
 
@@ -57,7 +68,8 @@ public class PlayerInteract : MonoBehaviour {
         }
     }
 
-    private bool CheckForInteractable() {
+    private bool CheckForInteractable()
+    {
         // Check that we hit something
         GameObject hitObject = CheckForHit();
         if (!hitObject) return false;
@@ -68,20 +80,26 @@ public class PlayerInteract : MonoBehaviour {
         return true;
     }
 
-    private GameObject CheckForHit() {
+    private GameObject CheckForHit()
+    {
         // Check if we hit something
         Vector2 direction = MovementStateToDirection();
         RaycastHit2D hit = Physics2D.Raycast(coll.bounds.center, direction, interactDistance);
 
-        if (!hit) {
+        if (!hit)
+        {
             return null;
-        } else {
+        }
+        else
+        {
             return hit.collider.gameObject;
         }
     }
 
-    private Vector2 MovementStateToDirection() {
-        switch (playerMovementState) {
+    private Vector2 MovementStateToDirection()
+    {
+        switch (playerMovementState)
+        {
             case PlayerMovementState.Left:
                 return Vector2.left;
             case PlayerMovementState.Up:
@@ -93,11 +111,13 @@ public class PlayerInteract : MonoBehaviour {
         }
     }
 
-    private void HandleMovementStateChange(PlayerMovementState state) {
+    private void HandleMovementStateChange(PlayerMovementState state)
+    {
         playerMovementState = state;
     }
 
-    private void HandleNpcBusyChange(bool busy) {
+    private void HandleNpcBusyChange(bool busy)
+    {
         uiBusy = busy;
     }
 }

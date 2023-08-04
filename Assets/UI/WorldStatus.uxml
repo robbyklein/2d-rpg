@@ -1,19 +1,33 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+    xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements"
+    editor="UnityEditor.UIElements"
+    noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Utility.uss" />
     <Style src="project://database/Assets/UI/Styles.uss" />
-    
-    <ui:VisualElement name="world-status" class="fullscreen p-5">
-        <ui:Label text="Robert" name="world-status-name" class="text-xl text-white text-shadow" />
 
-        <ui:VisualElement class="flex flex-row items-center mt-2">
-            <ui:VisualElement class="progress-bar">
-                <ui:VisualElement name="world-status-filled" class="progress-bar-filled">
+    <!-- Main wrapper -->
+    <ui:VisualElement name="world-status" class="mt-5 ml-5 absolute">
+        <!--Box -->
+        <ui:VisualElement class="flex-row">
+
+            <!-- Image -->
+            <ui:VisualElement class="w-12 h-16 player-image" />
+
+            <!-- Text -->
+            <ui:VisualElement class="flex-1 ml-6">
+                <ui:Label text="Robert" name="world-status-name"
+                    class="text-2xl text-white text-shadow" />
+
+                <ui:VisualElement class="flex-row items-center mt-4">
+                    <ui:VisualElement class="border-2 border-white w-52 bg-black">
+                        <ui:VisualElement name="world-status-filled" class="h-3 w-full bg-red-500">
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+
+                    <ui:Label name="world-status-health-text" text="100/100"
+                        class="text-lg text-white text-shadow ml-5" />
                 </ui:VisualElement>
             </ui:VisualElement>
-
-            <ui:Label name="world-status-health-text" text="100/100" class="text-lg text-white text-shadow ml-5" />
         </ui:VisualElement>
     </ui:VisualElement>
-    
-    
-
 </ui:UXML>

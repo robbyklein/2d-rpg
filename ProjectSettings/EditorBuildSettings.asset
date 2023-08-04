@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pause.unity
     guid: 323c9e343c0f51f4295c59478fa5e127
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: 1f4cea89701815046ba560e95740aec3
   m_configObjects: {}

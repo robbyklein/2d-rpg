@@ -1,13 +1,17 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+    xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements"
+    editor="UnityEditor.UIElements"
+    noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles.uss" />
+    <Style src="project://database/Assets/UI/Utility.uss" />
 
-    <ui:VisualElement name="interactions-display" class="fullscreen items-end justify-end p-5">
-        <ui:VisualElement class="flex-row items-center">
-            <ui:VisualElement class="key">
-                <ui:Label text="E" class="text-white text-lg" />
-            </ui:VisualElement>
 
-            <ui:Label text="Interact" class="text-white text-shadow text-lg ml-5" />
+    <ui:VisualElement class="absolute bottom-0 right-0 mb-5 mr-5 flex-row items-center">
+        <ui:VisualElement class="bg-black text-white items-center justify-center w-10 h-10">
+            <ui:Label text="E" class="text-white text-lg" />
         </ui:VisualElement>
+
+        <ui:Label text="Interact" class="text-white text-shadow text-xl ml-5" />
     </ui:VisualElement>
+
 </ui:UXML>

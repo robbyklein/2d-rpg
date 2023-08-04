@@ -71,6 +71,7 @@ public class PlayerInputManagerSO : ScriptableObject {
     }
 
     private void PausePerformed(InputAction.CallbackContext context) {
+        Debug.Log("World pause running!");
         OnWorldPause?.Invoke();
     }
 
@@ -93,6 +94,7 @@ public class PlayerInputManagerSO : ScriptableObject {
     public void DisableAllActionMaps() {
         Input.World.Disable();
         Input.Dialog.Disable();
+        Input.Pause.Disable();
     }
 
     public void ChangeActionMap(PlayerInputActionMap playerInputActionMap) {

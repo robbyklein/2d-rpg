@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3f7fb9b63ed0944a62c28b1f1247a2, type: 3}
   m_Name: Player Stats Manager
   m_EditorClassIdentifier: 
+  db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
+  level: 1
   maxHealth: 100
-  health: 44
-  defense: 0.1
+  health: 100

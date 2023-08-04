@@ -5,6 +5,7 @@ public enum GameState {
     Start,
     World,
     Pause,
+    Inventory,
     Battle
 }
 
@@ -39,14 +40,37 @@ public class GameManagerSO : ScriptableObject {
                 Time.timeScale = 0f;
                 input.ChangeActionMap(PlayerInputActionMap.Pause);
                 SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
+                UnloadScene("Inventory");
+                break;
+            case GameState.Inventory:
+                Time.timeScale = 0f;
+                input.ChangeActionMap(PlayerInputActionMap.Pause);
+                SceneManager.LoadSceneAsync("Inventory", LoadSceneMode.Additive);
+                UnloadScene("Pause");
                 break;
             case GameState.Battle:
                 break;
             default: // World
                 Time.timeScale = 1f;
-                SceneManager.UnloadSceneAsync("Pause");
+                UnloadScene("Pause");
+                UnloadScene("Inventory");
                 input.ChangeActionMap(PlayerInputActionMap.World);
                 break;
         }
+    }
+
+    private void UnloadScene(string scene) {
+        if (IsSceneLoaded(scene)) {
+            SceneManager.UnloadSceneAsync(scene);
+        }
+    }
+
+    private bool IsSceneLoaded(string sceneName) {
+        for (int i = 0; i < SceneManager.sceneCount; ++i) {
+            if (SceneManager.GetSceneAt(i).name == sceneName) {
+                return true;
+            }
+        }
+        return false;
     }
 }
