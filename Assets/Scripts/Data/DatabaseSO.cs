@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class PlayerData {
 [System.Serializable]
 public class Data {
     public PlayerData PlayerData = new PlayerData();
+    public List<ItemEntry> PlayerInventory;
 }
 
 
@@ -23,9 +25,14 @@ public class DatabaseSO : ScriptableObject {
     public Data Data { get; private set; }
 
     public Action OnPlayerDataUpdate;
+    public Action OnPlayerInventoryUpdate;
 
     private void OnEnable() {
         filepath ??= Path.Combine(Application.persistentDataPath, "savefile.json");
+
+#if UNITY_EDITOR
+        DeleteData();
+#endif
 
         if (!File.Exists(filepath)) {
             CreateSavefile();
@@ -34,17 +41,24 @@ public class DatabaseSO : ScriptableObject {
         else {
             LoadData();
         }
+
     }
 
     #region Updaters
-    public void UpdateCharacterData(PlayerData newCharacterData) {
+    public void UpdatePlayerData(PlayerData newCharacterData) {
         Data.PlayerData = newCharacterData;
         OnPlayerDataUpdate?.Invoke();
         SaveData();
     }
+
+    public void UpdatePlayerInventory(List<ItemEntry> newPlayerInventory) {
+        Data.PlayerInventory = newPlayerInventory;
+        OnPlayerInventoryUpdate?.Invoke();
+        SaveData();
+    }
     #endregion
 
-    #region Create/Load/Save
+    #region Create/Load/Save/Delete
     private void CreateSavefile() {
         Data data = new Data();
         SaveData();
@@ -58,6 +72,14 @@ public class DatabaseSO : ScriptableObject {
     private void LoadData() {
         string json = File.ReadAllText(filepath);
         Data = JsonUtility.FromJson<Data>(json);
+    }
+
+    private void DeleteData() {
+        if (File.Exists(filepath)) {
+            File.Delete(filepath);
+            Debug.Log("Deleted the save file");
+
+        }
     }
     #endregion
 }

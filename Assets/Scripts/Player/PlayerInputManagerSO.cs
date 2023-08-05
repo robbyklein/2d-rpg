@@ -71,7 +71,6 @@ public class PlayerInputManagerSO : ScriptableObject {
     }
 
     private void PausePerformed(InputAction.CallbackContext context) {
-        Debug.Log("World pause running!");
         OnWorldPause?.Invoke();
     }
 

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1614399253}
   - component: {fileID: 1614399252}
   - component: {fileID: 1614399254}
-  - component: {fileID: 1614399251}
+  - component: {fileID: 1614399255}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -142,37 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1614399251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614399250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ca9ba208885c147a81bc620fbfd029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Inventory
-  menuOptions:
-  - Title: Main Menu
-    Action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1614399254}
-          m_TargetAssemblyTypeName: InventoryActions, Assembly-CSharp
-          m_MethodName: MainMenu
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
 --- !u!114 &1614399252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,3 +186,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
+--- !u!114 &1614399255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614399250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2973e50dbd75542bda2255032e82ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Inventory
+  menuOptions:
+  - Title: Main Menu
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1614399254}
+          m_TargetAssemblyTypeName: InventoryActions, Assembly-CSharp
+          m_MethodName: MainMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
+  db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
+  inventory: {fileID: 11400000, guid: 212f803b8c37bb64284c54d41be469e7, type: 2}
