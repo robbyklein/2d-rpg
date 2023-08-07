@@ -29,6 +29,8 @@ public class WorldStatusManager : MonoBehaviour {
     private void UpdateUI() {
         PlayerData playerData = db.Data.PlayerData;
 
+        Debug.Log(playerData.Health);
+
         healthLabel.text = $"{playerData.Health}/{playerData.MaxHealth}";
         barFilledElement.style.width = new Length(playerData.Health / playerData.MaxHealth * 100, LengthUnit.Percent);
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData {
     public float Level = 1f;
-    public float Health = 100f;
+    public float Health = 40f;
     public float MaxHealth = 100f;
     public float Defense = 10f;
 }
@@ -15,7 +15,7 @@ public class PlayerData {
 [System.Serializable]
 public class Data {
     public PlayerData PlayerData = new PlayerData();
-    public List<ItemEntry> PlayerInventory;
+    public List<ItemEntry> PlayerInventory = new List<ItemEntry>();
 }
 
 
@@ -60,7 +60,7 @@ public class DatabaseSO : ScriptableObject {
 
     #region Create/Load/Save/Delete
     private void CreateSavefile() {
-        Data data = new Data();
+        Data = new Data();
         SaveData();
     }
 
@@ -78,7 +78,6 @@ public class DatabaseSO : ScriptableObject {
         if (File.Exists(filepath)) {
             File.Delete(filepath);
             Debug.Log("Deleted the save file");
-
         }
     }
     #endregion

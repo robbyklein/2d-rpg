@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 [System.Serializable]
 public struct MenuOption {
     public string Title;
+    public ItemType? ItemType;
     public UnityEngine.Events.UnityEvent Action;
 }
 

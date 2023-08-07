@@ -218,4 +218,4 @@ MonoBehaviour:
           m_CallState: 2
   playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
   db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
-  inventory: {fileID: 11400000, guid: 212f803b8c37bb64284c54d41be469e7, type: 2}
+  itemActions: {fileID: 11400000, guid: de116901c9feeb04bba7d99e066dbac9, type: 2}
