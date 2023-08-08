@@ -39,22 +39,12 @@ public class ItemEntry {
 public class InventorySO : ScriptableObject {
     [SerializeField] private DatabaseSO db;
 
-    public List<ItemEntry> itemList = new List<ItemEntry>();
-
-    private void OnEnable() {
-        itemList ??= db.Data.PlayerInventory;
-
-        if (db.Data.PlayerInventory.Count == 0) {
-            Debug.Log("Adding 2 potions");
-            AddItem(new ItemEntry(new Item { ItemType = ItemType.Potion }, 2));
-        }
-    }
 
     public void AddItem(ItemEntry itemEntry) {
-        ItemEntry entry = itemList.Find(x => x.Item.ItemType == itemEntry.Item.ItemType);
+        ItemEntry entry = db.Data.PlayerInventory.Find(x => x.Item.ItemType == itemEntry.Item.ItemType);
 
         if (entry == null) {
-            itemList.Add(itemEntry);
+            db.Data.PlayerInventory.Add(itemEntry);
         }
         else {
             entry.Quantity += itemEntry.Quantity;
@@ -64,15 +54,17 @@ public class InventorySO : ScriptableObject {
     }
 
     public void RemoveItem(ItemType itemType, int quantity) {
-        ItemEntry entry = itemList.Find(x => {
+        ItemEntry entry = db.Data.PlayerInventory.Find(x => {
+            Debug.Log(x.Item.ItemType);
             return x.Item.ItemType == itemType;
         });
+
 
         if (entry != null && entry.Quantity >= quantity) {
             entry.Quantity -= quantity;
 
             if (entry.Quantity <= 0) {
-                itemList.Remove(entry);
+                db.Data.PlayerInventory.Remove(entry);
             }
 
             Save();
@@ -80,7 +72,7 @@ public class InventorySO : ScriptableObject {
     }
 
     private void Save() {
-        db.UpdatePlayerInventory(itemList);
+        db.UpdatePlayerInventory(db.Data.PlayerInventory);
     }
 
 }

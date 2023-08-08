@@ -61,6 +61,12 @@ public class DatabaseSO : ScriptableObject {
     #region Create/Load/Save/Delete
     private void CreateSavefile() {
         Data = new Data();
+
+        // Create two potions and add them to the inventory
+        Item potionItem = new Item { ItemType = ItemType.Potion };
+        ItemEntry potionEntry1 = new ItemEntry(potionItem, 4);
+        Data.PlayerInventory.Add(potionEntry1);
+
         SaveData();
     }
 

@@ -13,6 +13,9 @@ public class InventoryPopulator : BaseMenuPopulator {
     private List<MenuOption> originalMenuItems;
 
     protected override void OnEnable() {
+        // Populate menu
+        uiDocument = GetComponent<UIDocument>();
+
         // We'll need these on rebuilds
         originalMenuItems = new List<MenuOption>(menuOptions);
 
@@ -24,9 +27,6 @@ public class InventoryPopulator : BaseMenuPopulator {
 
         // Enable menu action map
         playerInput.ChangeActionMap(PlayerInputActionMap.Pause);
-
-        // Populate menu
-        uiDocument = GetComponent<UIDocument>();
 
         PopulateMenu();
     }

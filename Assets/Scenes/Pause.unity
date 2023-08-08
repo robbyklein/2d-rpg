@@ -236,6 +236,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
+  uiDocument: {fileID: 414474755}
 --- !u!114 &414474758
 MonoBehaviour:
   m_ObjectHideFlags: 0
