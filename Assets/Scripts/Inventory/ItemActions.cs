@@ -10,12 +10,7 @@ public class ItemActions : ScriptableObject {
 
         float targetHealth = playerData.Health + 20;
 
-        if (targetHealth > playerData.MaxHealth) {
-            playerData.Health = playerData.MaxHealth;
-        }
-        else {
-            playerData.Health = targetHealth;
-        }
+        playerData.Health = Mathf.Min(targetHealth, playerData.MaxHealth);
 
         inventory.RemoveItem(ItemType.Potion, 1);
         db.UpdatePlayerData(playerData);

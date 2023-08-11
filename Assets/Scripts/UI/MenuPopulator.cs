@@ -4,6 +4,10 @@ using UnityEngine.UIElements;
 
 public class MenuPopulator : BaseMenuPopulator {
     protected override void OnEnable() {
+        // Populate menu
+        uiDocument = GetComponent<UIDocument>();
+        uiRoot = uiDocument.rootVisualElement;
+
         // Subscribe to events
         playerInput.OnPauseDown += HandleOnPauseDown;
         playerInput.OnPauseUp += HandleOnPauseUp;
@@ -12,10 +16,13 @@ public class MenuPopulator : BaseMenuPopulator {
         // Enable menu action map
         playerInput.ChangeActionMap(PlayerInputActionMap.Pause);
 
-        // Populate menu
-        uiDocument = GetComponent<UIDocument>();
-
         BuildMenu();
+    }
+
+    protected override void OnDisable() {
+        playerInput.OnPauseDown -= HandleOnPauseDown;
+        playerInput.OnPauseUp -= HandleOnPauseUp;
+        playerInput.OnPauseSelect -= HandleSelect;
     }
 
     protected override void HandleSelect() {

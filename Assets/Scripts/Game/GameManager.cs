@@ -1,5 +1,6 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     [SerializeField] private GameManagerSO gameManager;
 }
