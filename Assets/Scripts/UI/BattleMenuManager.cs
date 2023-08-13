@@ -51,9 +51,6 @@ public class BattleMenuManager : MonoBehaviour {
 
         // Build the menu
         BuildMenu();
-
-        // Enable the battle input map
-        playerInput.ChangeActionMap(PlayerInputActionMap.Battle);
     }
     #endregion
 
