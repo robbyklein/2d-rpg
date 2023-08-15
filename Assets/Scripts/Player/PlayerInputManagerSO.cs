@@ -105,6 +105,7 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Dialog.Disable();
         Input.Pause.Disable();
         Input.Battle.Disable();
+        Input.Menu.Disable();
     }
 
     public void ChangeActionMap(PlayerInputActionMap playerInputActionMap) {
@@ -190,7 +191,6 @@ public class PlayerInputManagerSO : ScriptableObject {
 
     #region Menu Handlers
     private void MenuSelectPerformed(InputAction.CallbackContext context) {
-        Debug.Log("menu select!");
         OnMenuSelect?.Invoke();
     }
     #endregion

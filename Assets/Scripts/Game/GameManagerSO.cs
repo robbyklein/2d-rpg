@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState {
-    Start,
+    MainMenu,
     World,
     Pause,
     Inventory,
@@ -19,6 +19,7 @@ public class GameManagerSO : ScriptableObject {
     private GameObject currentPause;
     private GameObject currentInventory;
 
+    public event Action<GameState> onGameStateChange;
 
     #region Lifecycle
     private void OnEnable() {
@@ -36,7 +37,7 @@ public class GameManagerSO : ScriptableObject {
 
     public void ChangeGameState(GameState state) {
         switch (state) {
-            case GameState.Start:
+            case GameState.MainMenu:
                 break;
             case GameState.Pause:
                 ChangeToPause();
@@ -50,6 +51,8 @@ public class GameManagerSO : ScriptableObject {
                 ChangeToWorld();
                 break;
         }
+
+        onGameStateChange?.Invoke(state);
     }
 
     private void ChangeToWorld() {
@@ -77,6 +80,8 @@ public class GameManagerSO : ScriptableObject {
     }
 
     private void ChangeToInventory() {
+        Debug.Log("In here!!!");
+
         // Stop everything else
         Time.timeScale = 0f;
 

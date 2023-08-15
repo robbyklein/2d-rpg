@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
     // Data
     [SerializeField] private AudioDataSO data;
+    [SerializeField] private GameManagerSO gameManager;
 
     // Players
     [SerializeField] private AudioSource musicSource;
@@ -13,14 +15,33 @@ public class AudioManager : MonoBehaviour {
     // Settings
     [SerializeField] private MusicFile initialSong;
 
+    // State
+    private MusicFile currentMusic;
 
-    public void Start() {
+    #region Lifecycle
+    private void OnEnable() {
+        gameManager.onGameStateChange += HandleGameStateChange;
+    }
+
+    private void OnDisable() {
+        gameManager.onGameStateChange -= HandleGameStateChange;
+    }
+
+    private void Start() {
         DontDestroyOnLoad(this.gameObject);
         ChangeMusic(initialSong);
     }
+    #endregion
 
     public void ChangeMusic(MusicFile song) {
-        StartCoroutine(ChangeMusicRoutine(song));
+        if (currentMusic != song) {
+            currentMusic = song;
+            StartCoroutine(ChangeMusicRoutine(song));
+        }
+        else {
+            StartCoroutine(FadeInMusic(1));
+
+        }
     }
 
     private IEnumerator ChangeMusicRoutine(MusicFile song) {
@@ -35,25 +56,46 @@ public class AudioManager : MonoBehaviour {
         yield return StartCoroutine(FadeInMusic());
     }
 
-    private IEnumerator FadeInMusic(float duration = 1f) {
+    private IEnumerator FadeInMusic(float targetVolume = 1, float duration = 0.5f) {
         musicSource.volume = 0;
 
-        while (musicSource.volume < 1.0f) {
-            musicSource.volume += Time.deltaTime / duration;
+        while (musicSource.volume < targetVolume) {
+            musicSource.volume += Time.unscaledDeltaTime / duration;
             yield return null;
         }
 
-        musicSource.volume = 1.0f;
+        musicSource.volume = targetVolume;
     }
 
-    private IEnumerator FadeOutMusic(float duration = 1.0f) {
+    private IEnumerator FadeOutMusic(float targetVolume = 0, float duration = 0.5f) {
         float startVolume = musicSource.volume;
 
-        while (musicSource.volume > 0) {
-            musicSource.volume -= startVolume * Time.deltaTime / duration;
+        while (musicSource.volume > targetVolume) {
+            musicSource.volume -= startVolume * Time.unscaledDeltaTime / duration;
             yield return null;
         }
 
-        musicSource.Stop();
+        if (musicSource.volume <= 0) {
+            musicSource.Stop();
+        }
     }
+
+    private void HandleGameStateChange(GameState state) {
+        // TODO: clean this up
+        switch (state) {
+            case GameState.World:
+                ChangeMusic(MusicFile.World);
+                break;
+            case GameState.Pause:
+                StartCoroutine(FadeOutMusic(0.1f));
+                break;
+            case GameState.Inventory:
+                StartCoroutine(FadeOutMusic(0.1f));
+                break;
+            case GameState.Battle:
+                ChangeMusic(MusicFile.Battle);
+                break;
+        }
+    }
+
 }
