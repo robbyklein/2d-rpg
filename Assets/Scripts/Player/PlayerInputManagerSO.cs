@@ -33,6 +33,10 @@ public class PlayerInputManagerSO : ScriptableObject {
     public event Action OnBattleDown;
     public event Action OnBattleSelect;
 
+    // Menu Events
+    public event Action OnMenuSelect;
+
+
     private void OnEnable() {
         // Create input system instance
         Input ??= new Controls();
@@ -58,8 +62,12 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Battle.Up.performed += BattleUpPerformed;
         Input.Battle.Down.performed += BattleDownPerformed;
 
+        // Subscribe to menu events
+        Input.Menu.Select.performed += MenuSelectPerformed;
+
         // Enable the world map by default
-        Input.World.Enable();
+        Input.Menu.Enable();
+        // Input.World.Enable();
     }
 
     private void OnDisable() {
@@ -83,6 +91,9 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Battle.Select.performed -= BattleSelectPerformed;
         Input.Battle.Up.performed -= BattleUpPerformed;
         Input.Battle.Down.performed -= BattleDownPerformed;
+
+        // Unsubscribe to menu events
+        Input.Menu.Select.performed -= MenuSelectPerformed;
 
         // Disable all input
         DisableAllActionMaps();
@@ -175,5 +186,12 @@ public class PlayerInputManagerSO : ScriptableObject {
     private void BattleBackPerformed(InputAction.CallbackContext context) {
         OnBattleBack?.Invoke();
     }
-    #endregion 
+    #endregion
+
+    #region Menu Handlers
+    private void MenuSelectPerformed(InputAction.CallbackContext context) {
+        Debug.Log("menu select!");
+        OnMenuSelect?.Invoke();
+    }
+    #endregion
 }

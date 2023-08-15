@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,17 +12,87 @@ public enum GameState {
 
 [CreateAssetMenu(fileName = "Game Manager", menuName = "ScriptableObjects/Managers/GameManager")]
 public class GameManagerSO : ScriptableObject {
-    //private GameState gameState = GameState.World; // While deving
     [SerializeField] private PlayerInputManagerSO input;
+    [SerializeField] private GameObject pausePrefab;
+    [SerializeField] private GameObject inventoryPrefab;
 
+    private GameObject currentPause;
+    private GameObject currentInventory;
+
+
+    #region Lifecycle
     private void OnEnable() {
+        input.OnMenuSelect += HandleStartGame;
         input.OnWorldPause += HandlePause;
         input.OnPauseResume += HandleResume;
     }
 
     private void OnDisable() {
+        input.OnMenuSelect -= HandleStartGame;
         input.OnWorldPause -= HandlePause;
         input.OnPauseResume -= HandleResume;
+    }
+    #endregion
+
+    public void ChangeGameState(GameState state) {
+        switch (state) {
+            case GameState.Start:
+                break;
+            case GameState.Pause:
+                ChangeToPause();
+                break;
+            case GameState.Inventory:
+                ChangeToInventory();
+                break;
+            case GameState.Battle:
+                break;
+            case GameState.World:
+                ChangeToWorld();
+                break;
+        }
+    }
+
+    private void ChangeToWorld() {
+        Time.timeScale = 1f;
+
+        if (currentPause) Destroy(currentPause);
+        if (currentInventory) Destroy(currentInventory);
+        if (!IsSceneLoaded("World")) SceneManager.LoadSceneAsync("World");
+
+        input.ChangeActionMap(PlayerInputActionMap.World);
+    }
+
+    private void ChangeToPause() {
+        // Stop everything else
+        Time.timeScale = 0f;
+
+        // Destroy the inventory menu if needed
+        if (currentInventory) Destroy(currentInventory);
+
+        // Create a pause menu
+        currentPause = Instantiate(pausePrefab);
+
+        // Change the input map
+        input.ChangeActionMap(PlayerInputActionMap.Pause);
+    }
+
+    private void ChangeToInventory() {
+        // Stop everything else
+        Time.timeScale = 0f;
+
+        // Destroy the inventory menu if needed
+        if (currentPause) Destroy(currentPause);
+
+        // Create a pause menu
+        currentInventory = Instantiate(inventoryPrefab);
+
+        // Change the input map
+        input.ChangeActionMap(PlayerInputActionMap.Pause);
+    }
+
+    #region Input Handlers
+    private void HandleStartGame() {
+        ChangeGameState(GameState.World);
     }
 
     private void HandleResume() {
@@ -31,34 +102,9 @@ public class GameManagerSO : ScriptableObject {
     private void HandlePause() {
         ChangeGameState(GameState.Pause);
     }
+    #endregion
 
-    public void ChangeGameState(GameState state) {
-        switch (state) {
-            case GameState.Start:
-                break;
-            case GameState.Pause:
-                Time.timeScale = 0f;
-                input.ChangeActionMap(PlayerInputActionMap.Pause);
-                SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
-                UnloadScene("Inventory");
-                break;
-            case GameState.Inventory:
-                Time.timeScale = 0f;
-                input.ChangeActionMap(PlayerInputActionMap.Pause);
-                SceneManager.LoadSceneAsync("Inventory", LoadSceneMode.Additive);
-                UnloadScene("Pause");
-                break;
-            case GameState.Battle:
-                break;
-            default: // World
-                Time.timeScale = 1f;
-                UnloadScene("Pause");
-                UnloadScene("Inventory");
-                input.ChangeActionMap(PlayerInputActionMap.World);
-                break;
-        }
-    }
-
+    #region SceneHelpers
     private void UnloadScene(string scene) {
         if (IsSceneLoaded(scene)) {
             SceneManager.UnloadSceneAsync(scene);
@@ -73,4 +119,5 @@ public class GameManagerSO : ScriptableObject {
         }
         return false;
     }
+    #endregion
 }
