@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum PlayerInputActionMap {
     World,
     Dialog,
     Pause,
     Battle,
+    Menu,
 }
 
 [CreateAssetMenu(fileName = "Player Input Manager", menuName = "ScriptableObjects/Managers/PlayerInputManager")]
@@ -66,9 +68,24 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Menu.Select.performed += MenuSelectPerformed;
 
         // Enable the world map by default
+#if UNITY_EDITOR
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        if (activeScene.name == "World") {
+            ChangeActionMap(PlayerInputActionMap.World);
+        }
+        else if (activeScene.name == "Battle") {
+            ChangeActionMap(PlayerInputActionMap.Battle);
+        }
+        else {
+            ChangeActionMap(PlayerInputActionMap.Menu);
+        }
+#else
         Input.Menu.Enable();
-        // Input.World.Enable();
+#endif
     }
+
+
 
     private void OnDisable() {
         // Unsubscribe from world events

@@ -80,8 +80,6 @@ public class GameManagerSO : ScriptableObject {
     }
 
     private void ChangeToInventory() {
-        Debug.Log("In here!!!");
-
         // Stop everything else
         Time.timeScale = 0f;
 

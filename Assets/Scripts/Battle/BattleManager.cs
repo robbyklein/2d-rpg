@@ -2,17 +2,21 @@ using System;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour {
+    // Components
+    [SerializeField] private DatabaseSO db;
     [SerializeField] private PlayerInputManagerSO playerInput;
     [SerializeField] private BattlePlayerTurn playerTurn;
 
-    private bool playerFirst = UnityEngine.Random.value > 0.5f;
+    // State
+    private bool playerFirst;
     private int turn = 0;
+    private Enemy enemy;
 
+    // Events
     public event Action OnEnemyTurnFinished;
 
     #region Lifecycle
     private void OnEnable() {
-        Debug.Log("Subsribing to player turn finished");
         playerTurn.OnPlayerTurnFinished += HandlePlayerTurnFinished;
     }
 
@@ -21,8 +25,12 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void Start() {
+        playerFirst = UnityEngine.Random.value > 0.5f;
+
+        // Figure out who we're fighting
+        enemy = new Enemy(db.Data.PlayerData.Level);
+
         if (playerFirst) {
-            Debug.Log("Player will go first");
             // Enable battle map so they can go
             playerInput.ChangeActionMap(PlayerInputActionMap.Battle);
         }

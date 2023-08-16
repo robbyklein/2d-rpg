@@ -136,6 +136,10 @@ PrefabInstance:
       value: Audio
       objectReference: {fileID: 0}
     - target: {fileID: 2801835447930377998, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
+    - target: {fileID: 2801835447930377998, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
       propertyPath: initialSong
       value: 1
       objectReference: {fileID: 0}
