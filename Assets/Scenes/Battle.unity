@@ -249,6 +249,8 @@ MonoBehaviour:
   db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
   playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
   playerTurn: {fileID: 421625826}
+  enemyData: {fileID: 11400000, guid: 09ad44271558dfc4c8b5d464905e7712, type: 2}
+  enemySprite: {fileID: 1337320777}
 --- !u!4 &421625825
 Transform:
   m_ObjectHideFlags: 0
@@ -494,7 +496,7 @@ GameObject:
   - component: {fileID: 1337320776}
   - component: {fileID: 1337320777}
   m_Layer: 0
-  m_Name: Square
+  m_Name: EnemyVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

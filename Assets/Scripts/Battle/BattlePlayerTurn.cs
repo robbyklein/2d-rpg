@@ -17,15 +17,11 @@ public class BattlePlayerTurn : MonoBehaviour {
 
     public void Attack() {
         playerInput.DisableAllActionMaps();
-
-        Debug.Log(OnPlayerTurnFinished);
         OnPlayerTurnFinished?.Invoke();
     }
 
     public void UseItem() {
         playerInput.DisableAllActionMaps();
-
-        Debug.Log("Player used an item");
         OnPlayerTurnFinished?.Invoke();
     }
 

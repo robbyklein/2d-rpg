@@ -66,8 +66,6 @@ public class BattleMenuManager : MonoBehaviour {
             case Menu.Items:
                 BuildItemsMenu();
                 break;
-                // default:
-                //     Debug.Log("Invalid selectedMenu");
         }
     }
 

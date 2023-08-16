@@ -55,7 +55,6 @@ public class InventorySO : ScriptableObject {
 
     public void RemoveItem(ItemType itemType, int quantity) {
         ItemEntry entry = db.Data.PlayerInventory.Find(x => {
-            Debug.Log(x.Item.ItemType);
             return x.Item.ItemType == itemType;
         });
 
