@@ -226,7 +226,6 @@ GameObject:
   m_Component:
   - component: {fileID: 421625825}
   - component: {fileID: 421625824}
-  - component: {fileID: 421625826}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -246,11 +245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27d50442b3a2ed40993d0378688f03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuManager: {fileID: 1395554120}
   db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
   playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
-  playerTurn: {fileID: 421625826}
   enemyData: {fileID: 11400000, guid: 09ad44271558dfc4c8b5d464905e7712, type: 2}
   enemySprite: {fileID: 1337320777}
+  playerSprite: {fileID: 908996680}
 --- !u!4 &421625825
 Transform:
   m_ObjectHideFlags: 0
@@ -266,20 +266,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &421625826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421625823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1fea25957ec9bb4b8e5aa21ca1c757b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
-  battleManager: {fileID: 421625824}
 --- !u!1001 &705245674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -555,8 +541,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1302163835
-  m_SortingLayer: 5
+  m_SortingLayerID: 1048355089
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7b5003f1c938a804a8c25728d3f30398, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -638,8 +624,8 @@ MonoBehaviour:
     Action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 421625826}
-          m_TargetAssemblyTypeName: BattlePlayerTurn, Assembly-CSharp
+        - m_Target: {fileID: 421625824}
+          m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
           m_MethodName: Attack
           m_Mode: 1
           m_Arguments:

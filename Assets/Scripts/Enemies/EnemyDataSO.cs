@@ -3,19 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType {
-    Cerberus,
-    Boneworm,
-    // Ooze,
-    // Rat,
-    // Scorpion,
-    // Skull,
-    // Slime
-}
-
 [System.Serializable]
 public struct EnemyInfo {
-    public EnemyType Type;
     public string Name;
     public float Health;
     public float Defense;
@@ -26,41 +15,41 @@ public struct EnemyInfo {
 [CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/Data/EnemyData")]
 public class EnemyDataSO : ScriptableObject {
     [SerializeField] private List<EnemyInfo> enemyInfos;
-    private Dictionary<EnemyType, EnemyInfo> enemyInfoDict;
+    private Dictionary<string, EnemyInfo> enemyInfoDict;
 
     private void OnEnable() {
         if (enemyInfoDict == null) {
-            enemyInfoDict = new();
+            enemyInfoDict = new Dictionary<string, EnemyInfo>();
 
             foreach (var enemyInfo in enemyInfos) {
-                enemyInfoDict[enemyInfo.Type] = enemyInfo;
+                enemyInfoDict[enemyInfo.Name] = enemyInfo;
             }
         }
     }
 
-    private EnemyType GetRandomEnemyType() {
-        Array values = Enum.GetValues(typeof(EnemyType));
-        return (EnemyType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+    private string GetRandomEnemyName() {
+        int index = UnityEngine.Random.Range(0, enemyInfos.Count);
+        return enemyInfos[index].Name;
     }
 
+    private float CreateMultiplier(float playerLevel) {
+        float randomFloat = 1.0f + UnityEngine.Random.value;
+        return randomFloat + (playerLevel / 10f);
+    }
 
     public EnemyInfo GetEnemyData(float playerLevel) {
-        EnemyType type = GetRandomEnemyType();
+        string name = GetRandomEnemyName();
 
-        if (enemyInfoDict.TryGetValue(type, out EnemyInfo enemyInfo)) {
-            float randomFloat = 1.0f + UnityEngine.Random.value;
-            float multiplayer = randomFloat + (playerLevel / 10f);
-
-            enemyInfo.Attack *= multiplayer;
-            enemyInfo.Defense *= multiplayer;
-            enemyInfo.Health *= multiplayer;
+        if (enemyInfoDict.TryGetValue(name, out EnemyInfo enemyInfo)) {
+            enemyInfo.Attack *= CreateMultiplier(playerLevel);
+            enemyInfo.Defense *= CreateMultiplier(playerLevel);
+            enemyInfo.Health *= CreateMultiplier(playerLevel);
 
             return enemyInfo;
         }
         else {
-            // Create a default enemy if not found
             enemyInfo = new EnemyInfo();
-            enemyInfoDict[type] = enemyInfo;
+            enemyInfoDict[name] = enemyInfo;
             return enemyInfo;
         }
     }

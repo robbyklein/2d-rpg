@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData {
     public float Level = 1f;
-    public float Health = 40f;
+    public float Health = 100f;
     public float MaxHealth = 100f;
     public float Defense = 10f;
 }

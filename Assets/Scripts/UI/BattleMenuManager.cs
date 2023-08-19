@@ -21,6 +21,8 @@ public class BattleMenuManager : MonoBehaviour {
     private Menu selectedMenu = Menu.Main;
     private int selectedIndex = 0;
 
+    public Action<ItemType> OnBattleUseItem;
+
 
     #region Lifecycle
     private void OnEnable() {
@@ -77,6 +79,8 @@ public class BattleMenuManager : MonoBehaviour {
     }
 
     private void BuildItemsMenu() {
+        menuOptionsEl.Clear();
+
         for (int i = 0; i < itemMenuOptions.Count; i++) {
             MenuOption itemMenuOption = itemMenuOptions[i];
             menuOptionsEl.Add(UIHelpers.BuildMenuOption(itemMenuOption.Title, i, selectedIndex));
@@ -126,8 +130,13 @@ public class BattleMenuManager : MonoBehaviour {
         if (selectedMenu == Menu.Main) {
             mainMenuOptions[selectedIndex].Action?.Invoke();
         }
+        else if (selectedMenu == Menu.Items && itemMenuOptions[selectedIndex].NormalAction != null) {
+            itemMenuOptions[selectedIndex].NormalAction?.Invoke();
+        }
         else if (selectedMenu == Menu.Items) {
-            itemMenuOptions[selectedIndex].NormalAction.Invoke();
+            MenuOption menuOption = itemMenuOptions[selectedIndex];
+            OnBattleUseItem(menuOption.ItemType.Value);
+            SwitchToMainMenu();
         }
     }
 

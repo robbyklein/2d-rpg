@@ -8,7 +8,7 @@ public class ItemActions : ScriptableObject {
     private void UsePotion() {
         PlayerData playerData = db.Data.PlayerData;
 
-        float targetHealth = playerData.Health + 20;
+        float targetHealth = playerData.Health + 50;
 
         playerData.Health = Mathf.Min(targetHealth, playerData.MaxHealth);
 

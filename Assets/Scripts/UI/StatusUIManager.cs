@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,7 +30,9 @@ public class StatusUIManager : MonoBehaviour {
     private void UpdateUI() {
         PlayerData playerData = db.Data.PlayerData;
 
-        healthLabel.text = $"{playerData.Health}/{playerData.MaxHealth}";
+        int healthRounded = (int)Math.Ceiling(playerData.Health);
+
+        healthLabel.text = $"{healthRounded}/{playerData.MaxHealth}";
         barFilledElement.style.width = new Length(playerData.Health / playerData.MaxHealth * 100, LengthUnit.Percent);
     }
 
