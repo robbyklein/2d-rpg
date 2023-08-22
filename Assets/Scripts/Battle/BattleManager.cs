@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour {
+public class BattleManager : MonoBehaviour
+{
     // Components
     [SerializeField] private BattleMenuManager menuManager;
     [SerializeField] private DatabaseSO db;
@@ -17,19 +18,23 @@ public class BattleManager : MonoBehaviour {
     private int turn = 0;
     private EnemyInfo enemyInfo;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         menuManager.OnBattleUseItem += UseItem;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         menuManager.OnBattleUseItem -= UseItem;
     }
 
-    private void Start() {
+    private void Start()
+    {
         initiateBattle();
     }
 
-    private void initiateBattle() {
+    private void initiateBattle()
+    {
         // See who goes first
         playerFirst = UnityEngine.Random.value > 0.5f;
 
@@ -44,26 +49,31 @@ public class BattleManager : MonoBehaviour {
         Debug.Log($"Battle initiated! You're fighting: // Type: {enemyInfo.Name} Attack: {enemyInfo.Attack} // Health: ${enemyInfo.Health} // Defense: {enemyInfo.Defense}");
 
         // Start battle
-        if (playerFirst) {
+        if (playerFirst)
+        {
             playerInput.ChangeActionMap(PlayerInputActionMap.Battle);
         }
-        else {
+        else
+        {
             StartCoroutine(EnemyTurn());
         }
     }
 
-    public void Attack() {
+    public void Attack()
+    {
         playerInput.DisableAllActionMaps();
         StartCoroutine(AttackRoutine());
     }
 
-    public void UseItem(ItemType type) {
+    public void UseItem(ItemType type)
+    {
         playerInput.DisableAllActionMaps();
         itemActions.UseItem(type);
         StartCoroutine(EnemyTurn());
     }
 
-    private IEnumerator AttackRoutine() {
+    private IEnumerator AttackRoutine()
+    {
         enemyInfo.Health -= calculateAttackDamage();
         yield return StartCoroutine(AttackMovement(playerSprite, enemySprite));
         StartCoroutine(EnemyTurn());
@@ -71,31 +81,37 @@ public class BattleManager : MonoBehaviour {
         CheckBattleFinished();
     }
 
-    private void CheckBattleFinished() {
+    private void CheckBattleFinished()
+    {
         PlayerData playerStats = db.Data.PlayerData;
 
         Debug.Log($"Player {playerStats.Health}. Enemy: {enemyInfo.Health}");
 
-        if (enemyInfo.Health <= 0) {
+        if (enemyInfo.Health <= 0)
+        {
             Debug.Log("You win!");
         }
-        else if (playerStats.Health <= 0) {
+        else if (playerStats.Health <= 0)
+        {
             Debug.Log("You lose");
         }
 
     }
 
-    private float calculateAttackDamage() {
+    private float calculateAttackDamage()
+    {
         PlayerData playerStats = db.Data.PlayerData;
         return playerStats.Level * 50 * (1 - (enemyInfo.Defense / 100));
     }
 
-    private float calculateDamageTaken() {
+    private float calculateDamageTaken()
+    {
         PlayerData playerStats = db.Data.PlayerData;
         return enemyInfo.Attack * (1 - (playerStats.Defense / 100));
     }
 
-    private IEnumerator EnemyTurn() {
+    private IEnumerator EnemyTurn()
+    {
         yield return new WaitForSeconds(1f);
         // Move enemy sprite towards player
         yield return StartCoroutine(AttackMovement(enemySprite, playerSprite));
@@ -111,7 +127,8 @@ public class BattleManager : MonoBehaviour {
         CheckBattleFinished();
     }
 
-    private IEnumerator AttackMovement(SpriteRenderer attacker, SpriteRenderer target) {
+    private IEnumerator AttackMovement(SpriteRenderer attacker, SpriteRenderer target)
+    {
         int initialSortingOrder = attacker.sortingOrder;
         Vector3 initialPosition = attacker.transform.position;
         Vector3 targetPosition = target.transform.position;
@@ -121,7 +138,8 @@ public class BattleManager : MonoBehaviour {
         float duration = 0.5f;
         float elapsedTime = 0f;
 
-        while (elapsedTime < duration) {
+        while (elapsedTime < duration)
+        {
             float t = elapsedTime / duration;
             attacker.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
             elapsedTime += Time.deltaTime;
@@ -129,7 +147,8 @@ public class BattleManager : MonoBehaviour {
         }
 
         elapsedTime = 0f;
-        while (elapsedTime < duration) {
+        while (elapsedTime < duration)
+        {
             float t = elapsedTime / duration;
             attacker.transform.position = Vector3.Lerp(targetPosition, initialPosition, t);
             elapsedTime += Time.deltaTime;

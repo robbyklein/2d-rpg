@@ -251,6 +251,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 09ad44271558dfc4c8b5d464905e7712, type: 2}
   enemySprite: {fileID: 1337320777}
   playerSprite: {fileID: 908996680}
+  itemActions: {fileID: 11400000, guid: de116901c9feeb04bba7d99e066dbac9, type: 2}
 --- !u!4 &421625825
 Transform:
   m_ObjectHideFlags: 0
