@@ -417,6 +417,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1409801-19cb-46ce-a850-5e3244a01849"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0605ad3-79ee-4660-a637-9bda150d92bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -439,6 +457,50 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3119a126-c11f-4324-b794-6d5d1b48df3d"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aeb34846-9f5d-47b6-ac1d-a9237bedcdcb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1123a9ed-4af5-4ef7-b568-f6ffc8e4860d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b81d05c2-880e-49fa-ad1f-5a246d5ae15d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -470,6 +532,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Select = m_Menu.FindAction("Select", throwIfNotFound: true);
+        m_Menu_Left = m_Menu.FindAction("Left", throwIfNotFound: true);
+        m_Menu_Right = m_Menu.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -780,11 +844,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_Select;
+    private readonly InputAction m_Menu_Left;
+    private readonly InputAction m_Menu_Right;
     public struct MenuActions
     {
         private @Controls m_Wrapper;
         public MenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Menu_Select;
+        public InputAction @Left => m_Wrapper.m_Menu_Left;
+        public InputAction @Right => m_Wrapper.m_Menu_Right;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -797,6 +865,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -804,6 +878,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -848,5 +928,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IMenuActions
     {
         void OnSelect(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }

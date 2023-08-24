@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+    xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements"
+    editor="UnityEditor.UIElements"
+    noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles.uss" />
+    <Style src="project://database/Assets/UI/Utility.uss" />
+
+
+    <ui:VisualElement class="w-full h-full bg-black items-center justify-center">
+        <ui:VisualElement class="items-center justify-center">
+            <ui:VisualElement class="w-20 h-20 player-image-main mb-5" />
+            <ui:Label class="text-white text-2xl my-5" text="The adventures of" />
+            <ui:Label class="text-white text-7xl" text="Lazo" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="main-menu-languages" class="flex-row mt-12">
+
+        </ui:VisualElement>
+
+        <ui:Label class="text-white text-2xl my-5 absolute bottom-0 mb-10"
+            text="Press ENTER to start" />
+    </ui:VisualElement>
+
+    <ui:VisualElement name="main-menu-overlay"
+        class="w-full h-full bg-black absolute top-0 left-0 z-10">
+    </ui:VisualElement>
+
+</ui:UXML>

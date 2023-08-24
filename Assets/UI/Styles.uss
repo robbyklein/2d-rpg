@@ -11,6 +11,23 @@
     background-image: url('project://database/Assets/TopDown 2D RPG BE3/Sprites/PlayerPortrait.png');
 }
 
+.player-image-main {
+    background-size: auto 100%;
+    background-image: url('project://database/Assets/TopDown 2D RPG BE3/Sprites/PlayerPortrait.png');
+}
+
 .bg-transparent-black {
     background-color: rgba(0,0,0,0.75);
+}
+
+#overlay {
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+}
+
+#main-menu-overlay {
+    transition-property: opacity;
+    transition-duration: 4s;
+    transition-timing-function: linear;
 }

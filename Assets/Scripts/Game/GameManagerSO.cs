@@ -15,6 +15,7 @@ public class GameManagerSO : ScriptableObject {
     [SerializeField] private PlayerInputManagerSO input;
     [SerializeField] private GameObject pausePrefab;
     [SerializeField] private GameObject inventoryPrefab;
+    [SerializeField] private DatabaseSO db;
 
     private GameObject currentPause;
     private GameObject currentInventory;
@@ -23,17 +24,20 @@ public class GameManagerSO : ScriptableObject {
 
     #region Lifecycle
     private void OnEnable() {
-        input.OnMenuSelect += HandleStartGame;
         input.OnWorldPause += HandlePause;
         input.OnPauseResume += HandleResume;
     }
 
     private void OnDisable() {
-        input.OnMenuSelect -= HandleStartGame;
         input.OnWorldPause -= HandlePause;
         input.OnPauseResume -= HandleResume;
     }
     #endregion
+
+    private GameObject FindPlayerVisual() {
+        GameObject playerVisualInScene = GameObject.FindGameObjectWithTag("PlayerVisual");
+        return playerVisualInScene;
+    }
 
     public void ChangeGameState(GameState state) {
         switch (state) {
@@ -46,6 +50,7 @@ public class GameManagerSO : ScriptableObject {
                 ChangeToInventory();
                 break;
             case GameState.Battle:
+                ChangeToBattle();
                 break;
             case GameState.World:
                 ChangeToWorld();
@@ -56,13 +61,26 @@ public class GameManagerSO : ScriptableObject {
     }
 
     private void ChangeToWorld() {
+        // Unpause
         Time.timeScale = 1f;
 
+        // Get rid of menus
         if (currentPause) Destroy(currentPause);
         if (currentInventory) Destroy(currentInventory);
+
+        // Unload other scenes
+        if (IsSceneLoaded("Battle")) SceneManager.UnloadSceneAsync("Battle");
+
+        // Load world
         if (!IsSceneLoaded("World")) SceneManager.LoadSceneAsync("World");
 
+        // Set action map
         input.ChangeActionMap(PlayerInputActionMap.World);
+    }
+
+    private void ChangeToBattle() {
+        // Load battle scene
+        SceneManager.LoadSceneAsync("Battle", LoadSceneMode.Additive);
     }
 
     private void ChangeToPause() {
@@ -94,10 +112,6 @@ public class GameManagerSO : ScriptableObject {
     }
 
     #region Input Handlers
-    private void HandleStartGame() {
-        ChangeGameState(GameState.World);
-    }
-
     private void HandleResume() {
         ChangeGameState(GameState.World);
     }

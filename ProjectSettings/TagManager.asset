@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Npc
+  - PlayerVisual
+  - Overlay
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Dangerous Ground
-  - 
-  - 
+  - Battle Elements
+  - Battle Top
   - 
   - 
   - 
@@ -56,4 +58,10 @@ TagManager:
     locked: 0
   - name: NPCs
     uniqueID: 2992803461
+    locked: 0
+  - name: Battle Bg
+    uniqueID: 818758713
+    locked: 0
+  - name: Battle Top
+    uniqueID: 221420033
     locked: 0

@@ -15,7 +15,7 @@
 
             <!-- Text -->
             <ui:VisualElement class="flex-1 ml-6">
-                <ui:Label text="Robert" name="world-status-name"
+                <ui:Label text="Lazo" name="world-status-name"
                     class="text-2xl text-white text-shadow" />
 
                 <ui:VisualElement class="flex-row items-center mt-4">

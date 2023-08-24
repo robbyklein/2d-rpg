@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -12,12 +13,12 @@ public class PlayerData {
 }
 
 
+
 [System.Serializable]
 public class Data {
     public PlayerData PlayerData = new PlayerData();
     public List<ItemEntry> PlayerInventory = new List<ItemEntry>();
 }
-
 
 [CreateAssetMenu(fileName = "Database", menuName = "ScriptableObjects/Data/Database")]
 public class DatabaseSO : ScriptableObject {
@@ -30,9 +31,7 @@ public class DatabaseSO : ScriptableObject {
     private void OnEnable() {
         filepath ??= Path.Combine(Application.persistentDataPath, "savefile.json");
 
-#if UNITY_EDITOR
         DeleteData();
-#endif
 
         if (!File.Exists(filepath)) {
             CreateSavefile();

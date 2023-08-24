@@ -15,3 +15,5 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
   pausePrefab: {fileID: 8950596093081640885, guid: c530cfec02f45b94e857247c369a8e7f, type: 3}
   inventoryPrefab: {fileID: 2896325106936807430, guid: 49df660228fd3b24a8bfc968675c3cd2, type: 3}
+  playerVisual: {fileID: 0}
+  db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}

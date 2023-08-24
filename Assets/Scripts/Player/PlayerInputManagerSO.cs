@@ -37,7 +37,8 @@ public class PlayerInputManagerSO : ScriptableObject {
 
   // Menu Events
   public event Action OnMenuSelect;
-
+  public event Action OnMenuLeft;
+  public event Action OnMenuRight;
 
   private void OnEnable() {
     // Create input system instance
@@ -66,6 +67,9 @@ public class PlayerInputManagerSO : ScriptableObject {
 
     // Subscribe to menu events
     Input.Menu.Select.performed += MenuSelectPerformed;
+    Input.Menu.Left.performed += MenuLeftPerformed;
+    Input.Menu.Right.performed += MenuRightPerformed;
+
 
     // Enable the world map by default
 #if UNITY_EDITOR
@@ -111,6 +115,8 @@ public class PlayerInputManagerSO : ScriptableObject {
 
     // Unsubscribe to menu events
     Input.Menu.Select.performed -= MenuSelectPerformed;
+    Input.Menu.Left.performed -= MenuLeftPerformed;
+    Input.Menu.Right.performed -= MenuRightPerformed;
 
     // Disable all input
     DisableAllActionMaps();
@@ -142,6 +148,9 @@ public class PlayerInputManagerSO : ScriptableObject {
         break;
       case PlayerInputActionMap.Battle:
         Input.Battle.Enable();
+        break;
+      case PlayerInputActionMap.Menu:
+        Input.Menu.Enable();
         break;
       default:
         Debug.LogError("Invalid input action map");
@@ -209,6 +218,14 @@ public class PlayerInputManagerSO : ScriptableObject {
   #region Menu Handlers
   private void MenuSelectPerformed(InputAction.CallbackContext context) {
     OnMenuSelect?.Invoke();
+  }
+
+  private void MenuLeftPerformed(InputAction.CallbackContext context) {
+    OnMenuLeft?.Invoke();
+  }
+
+  private void MenuRightPerformed(InputAction.CallbackContext context) {
+    OnMenuRight?.Invoke();
   }
   #endregion
 }

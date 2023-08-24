@@ -17,17 +17,27 @@ MonoBehaviour:
     NpcData:
     - Key: luna
       Dialog:
-      - Hello!
+      - 'What? Stones you say? '
+      - Okay one second..................
+      - All gone!
     - Key: ludo
       Dialog:
-      - Hello my friend
-      - How are you doing?
+      - Hello my friend! I need a favor...
+      - It seems theres some stones blocking the exit.
+      - Can you talk to Luna north west of here?
+      - Shes got magical powers and can clear it.
+      - Thanks!
   - Key: es
     NpcData:
     - Key: luna
       Dialog:
-      - Hola!
+      - Que? Piedras dices?
+      - Bueno un segundo.....
+      - Todo se ha ido!
     - Key: ludo
       Dialog:
-      - Hola mi amigo
-      - Como estas?
+      - Hola mi amigo! Necesito un favor...
+      - Parece que hay algunas piedras bloqueando la salida.
+      - Puedes hablar con Luna al noroeste de aqui?
+      - Tiene poderes magicos y puede eliminarlos.
+      - Gracias!

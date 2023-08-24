@@ -20,9 +20,6 @@ public class LanguageSO : ScriptableObject {
     public Dictionary<string, Dictionary<string, List<string>>> LanguageDict { get; private set; }
 
     void OnEnable() {
-        // For testing
-        PlayerPrefs.SetString("playerLanguage", "en");
-
         LanguageDict = new();
 
         foreach (var lang in language) {
