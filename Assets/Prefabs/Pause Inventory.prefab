@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4715586727477205163
 MonoBehaviour:
@@ -62,9 +62,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2973e50dbd75542bda2255032e82ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Inventory
+  keyLanguage: {fileID: 11400000, guid: ad0fa13897618364c833f5ad8c3a893d, type: 2}
+  titleKey: inventory
   menuOptions:
-  - Title: Main Menu
+  - Key: menu
     Action:
       m_PersistentCalls:
         m_Calls:

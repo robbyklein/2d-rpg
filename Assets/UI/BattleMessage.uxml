@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+    xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements"
+    editor="UnityEditor.UIElements"
+    noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+
+    <Style src="project://database/Assets/UI/Utility.uss" />
+    <Style src="project://database/Assets/UI/Styles.uss" />
+
+
+    <ui:VisualElement name="battle-message"
+        class="absolute top-0 mt-5 right-one-half translate-one-half-0 bg-blue-800 text-white p-4 border-2 border-white opacity-0">
+        <ui:Label text=""
+            name="battle-message-text"
+            class="text-shadow text-lg" />
+    </ui:VisualElement>
+
+</ui:UXML>

@@ -11,7 +11,7 @@
             <ui:Label text="E" class="text-white text-lg" />
         </ui:VisualElement>
 
-        <ui:Label text="Interact" class="text-white text-shadow text-xl ml-5" />
+        <ui:Label name="interact-label" class="text-white text-shadow text-xl ml-5" />
     </ui:VisualElement>
 
 </ui:UXML>

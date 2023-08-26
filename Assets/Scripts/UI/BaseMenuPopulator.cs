@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [System.Serializable]
 public struct MenuOption {
-    public string Title;
+    public string Key;
+
+    public string? Text;
     public ItemType? ItemType;
     public UnityEngine.Events.UnityEvent Action;
     public Action NormalAction;
@@ -13,7 +16,8 @@ public struct MenuOption {
 
 public abstract class BaseMenuPopulator : MonoBehaviour {
     // Fields
-    [SerializeField] protected string title;
+    [SerializeField] protected KeyLanguageSO keyLanguage;
+    [SerializeField] protected string titleKey;
     [SerializeField] protected List<MenuOption> menuOptions;
     [SerializeField] protected PlayerInputManagerSO playerInput;
 
@@ -40,6 +44,9 @@ public abstract class BaseMenuPopulator : MonoBehaviour {
     protected abstract void HandleSelect();
 
     protected void BuildMenu() {
+        // Retrieve title
+        string title = keyLanguage.RetrieveValue(titleKey);
+
         // Set title
         uiRoot.Q<Label>(name: "menu-title").text = title;
 
@@ -52,7 +59,15 @@ public abstract class BaseMenuPopulator : MonoBehaviour {
         // Add options
         for (int i = 0; i < menuOptions.Count; i++) {
             MenuOption menuOption = menuOptions[i];
-            menuOptionsEl.Add(UIHelpers.BuildMenuOption(menuOption.Title, i, selectedIndex));
+
+            if (!string.IsNullOrEmpty(menuOption.Text)) {
+                menuOptionsEl.Add(UIHelpers.BuildMenuOption(menuOption.Text, i, selectedIndex));
+            }
+            else {
+                string text = keyLanguage.RetrieveValue(menuOption.Key);
+                menuOptionsEl.Add(UIHelpers.BuildMenuOption(text, i, selectedIndex));
+            }
+
         }
     }
 }

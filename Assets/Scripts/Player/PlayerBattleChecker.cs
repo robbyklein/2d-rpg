@@ -8,6 +8,12 @@ public class PlayerBattleChecker : MonoBehaviour {
   [SerializeField] private PlayerMovement playerMovement;
   [SerializeField] private LayerMask dangerousGround;
 
+  [SerializeField] private float battleThreshold = 0.6f;
+  [SerializeField] private int battleCooldown = 2;
+  [SerializeField] private int maxBattleDistance = 5;
+
+  private int lastBattleDistance = 0;
+
   private bool playerIsMoving = false;
   private bool playerInDangerousGround = false;
   private GameState gameState = GameState.World;
@@ -22,20 +28,30 @@ public class PlayerBattleChecker : MonoBehaviour {
     gameManager.onGameStateChange -= handleGameStateChange;
   }
 
-
   private void Start() {
     StartCoroutine(BattleCheckRoutine());
   }
 
   private bool ShouldFightOccur() {
+    if (lastBattleDistance > maxBattleDistance) {
+      return true;
+    }
+
     float randomValue = UnityEngine.Random.value;
-    return randomValue > 0.75 && playerIsMoving && playerInDangerousGround && gameState == GameState.World;
+    return randomValue > battleThreshold && playerIsMoving && playerInDangerousGround && gameState == GameState.World && lastBattleDistance > battleCooldown;
   }
 
   private IEnumerator BattleCheckRoutine() {
     while (true) {
+
+      if (playerIsMoving && playerInDangerousGround) {
+        lastBattleDistance += 1;
+        Debug.Log(lastBattleDistance);
+      }
+
       if (ShouldFightOccur()) {
         gameManager.ChangeGameState(GameState.Battle);
+        lastBattleDistance = 0;
       }
 
       yield return new WaitForSeconds(1.0f);

@@ -82,7 +82,6 @@ public class DatabaseSO : ScriptableObject {
     private void DeleteData() {
         if (File.Exists(filepath)) {
             File.Delete(filepath);
-            Debug.Log("Deleted the save file");
         }
     }
     #endregion

@@ -81,9 +81,6 @@ public class AudioManager : MonoBehaviour {
     }
 
     private void HandleGameStateChange(GameState state) {
-        Debug.Log("Game state changed (audio listenr)");
-
-        // TODO: clean this up
         switch (state) {
             case GameState.World:
                 ChangeMusic(MusicFile.World);

@@ -51,8 +51,9 @@ public class InventoryPopulator : BaseMenuPopulator {
         // Add menu options for each one
         for (int i = 0; i < items.Count; i++) {
             ItemEntry item = items[i];
-            string itemTitle = $"{item.Quantity}x {item.ItemName}";
-            menuOptions.Insert(0, new MenuOption { Title = itemTitle, ItemType = item.ItemType });
+            string itemName = keyLanguage.RetrieveValue(item.ItemName);
+            string itemTitle = $"{item.Quantity}x {itemName}";
+            menuOptions.Insert(0, new MenuOption { Key = item.ItemName, Text = itemTitle, ItemType = item.ItemType });
         }
 
         BuildMenu();

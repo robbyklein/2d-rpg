@@ -51,6 +51,8 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     private IEnumerator Start() {
+        PlayerPrefs.DeleteKey("playerLanguage");
+
         uiDocument = GetComponent<UIDocument>();
         uiRoot = uiDocument.rootVisualElement;
         menuOptions = uiRoot.Q(name: "main-menu-languages");
@@ -62,7 +64,8 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     private void StartGame() {
-        PlayerPrefs.SetString("playerLanguage", selectedIndex == 0 ? "en" : "es");
+        string language = selectedIndex == 0 ? "en" : "es";
+        PlayerPrefs.SetString("playerLanguage", language);
         gameManager.ChangeGameState(GameState.World);
     }
 

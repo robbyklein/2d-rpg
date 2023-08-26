@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class EntityDestroyReaction : MonoBehaviour {
     [SerializeField] private GameObject destroyObject;
     private EntityDialog npcDialog;
+
+    public Action<GameObject> OnDestroyReaction;
 
     private void OnEnable() {
         npcDialog ??= GetComponent<EntityDialog>();
@@ -18,5 +21,6 @@ public class EntityDestroyReaction : MonoBehaviour {
     }
     private void DestroyObject() {
         destroyObject.SetActive(false);
+        OnDestroyReaction?.Invoke(destroyObject);
     }
 }

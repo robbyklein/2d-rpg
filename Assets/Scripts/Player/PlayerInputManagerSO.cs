@@ -153,7 +153,6 @@ public class PlayerInputManagerSO : ScriptableObject {
         Input.Menu.Enable();
         break;
       default:
-        Debug.LogError("Invalid input action map");
         break;
     }
   }

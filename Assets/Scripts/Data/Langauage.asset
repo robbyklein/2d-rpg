@@ -27,6 +27,10 @@ MonoBehaviour:
       - Can you talk to Luna north west of here?
       - Shes got magical powers and can clear it.
       - Thanks!
+    - Key: ludo2
+      Dialog:
+      - Thanks Lazo!
+      - Can you go kill the dragon to the far east?
   - Key: es
     NpcData:
     - Key: luna
@@ -41,3 +45,7 @@ MonoBehaviour:
       - Puedes hablar con Luna al noroeste de aqui?
       - Tiene poderes magicos y puede eliminarlos.
       - Gracias!
+    - Key: ludo2
+      Dialog:
+      - Gracias Lazo!
+      - "\xBFPuedes ir a matar al drag\xF3n al lejano oriente?"

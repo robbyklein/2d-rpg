@@ -12,6 +12,7 @@ public class BattleMenuManager : MonoBehaviour {
 
     [SerializeField] PlayerInputManagerSO playerInput;
     [SerializeField] private DatabaseSO db;
+    [SerializeField] private KeyLanguageSO keyLanguage;
     [SerializeField] private List<MenuOption> mainMenuOptions;
     [SerializeField] private List<MenuOption> itemMenuOptions;
 
@@ -74,7 +75,8 @@ public class BattleMenuManager : MonoBehaviour {
     private void BuildMainMenu() {
         for (int i = 0; i < mainMenuOptions.Count; i++) {
             MenuOption mainMenuOption = mainMenuOptions[i];
-            menuOptionsEl.Add(UIHelpers.BuildMenuOption(mainMenuOption.Title, i, selectedIndex));
+            string text = keyLanguage.RetrieveValue(mainMenuOption.Key);
+            menuOptionsEl.Add(UIHelpers.BuildMenuOption(text, i, selectedIndex));
         }
     }
 
@@ -83,7 +85,14 @@ public class BattleMenuManager : MonoBehaviour {
 
         for (int i = 0; i < itemMenuOptions.Count; i++) {
             MenuOption itemMenuOption = itemMenuOptions[i];
-            menuOptionsEl.Add(UIHelpers.BuildMenuOption(itemMenuOption.Title, i, selectedIndex));
+
+            if (!string.IsNullOrEmpty(itemMenuOption.Text)) {
+                menuOptionsEl.Add(UIHelpers.BuildMenuOption(itemMenuOption.Text, i, selectedIndex));
+            }
+            else {
+                string text = keyLanguage.RetrieveValue(itemMenuOption.Key);
+                menuOptionsEl.Add(UIHelpers.BuildMenuOption(text, i, selectedIndex));
+            }
         }
     }
 
@@ -97,13 +106,15 @@ public class BattleMenuManager : MonoBehaviour {
         // Add a new one for each item
         for (int i = 0; i < items.Count; i++) {
             ItemEntry item = items[i];
-            string itemTitle = $"{item.Quantity}x {item.ItemName}";
-            itemMenuOptions.Insert(0, new MenuOption { Title = itemTitle, ItemType = item.ItemType });
+
+            string itemName = keyLanguage.RetrieveValue(item.ItemName);
+            string text = $"{item.Quantity}x {itemName}";
+            itemMenuOptions.Insert(0, new MenuOption { Text = text, Key = item.ItemName, ItemType = item.ItemType });
         }
 
         // Add an extra to go back to main menu
         itemMenuOptions.Add(new MenuOption {
-            Title = "Main menu",
+            Key = "menu",
             NormalAction = SwitchToMainMenu
         });
     }
@@ -141,12 +152,12 @@ public class BattleMenuManager : MonoBehaviour {
     }
 
     private void HandleDown() {
-        selectedIndex = (selectedIndex + mainMenuOptions.Count - 1) % mainMenuOptions.Count;
+        selectedIndex = (selectedIndex + 1) % mainMenuOptions.Count;
         BuildMenu();
     }
 
     private void HandleUp() {
-        selectedIndex = (selectedIndex + 1) % mainMenuOptions.Count;
+        selectedIndex = (selectedIndex + mainMenuOptions.Count - 1) % mainMenuOptions.Count;
         BuildMenu();
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public enum DialogState {
@@ -33,6 +34,12 @@ public class EntityDialog : MonoBehaviour, IInteractable {
     // UI
     VisualElement rootUiElement;
     Label textUiElement;
+
+    public void SwapNpcKey(string key) {
+        npcKey = key;
+        activeDialogIndex = 0;
+        dialogs = language.retrieveDialog(npcKey);
+    }
 
     private void OnEnable() {
         playerInputManager.OnDialogSelect += HandleDialogSelect;
