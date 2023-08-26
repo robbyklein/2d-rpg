@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MainMenuManager : MonoBehaviour {
+    [SerializeField] private AudioManager audio;
+    [SerializeField] private DatabaseSO db;
     [SerializeField] private GameManagerSO gameManager;
     [SerializeField] private PlayerInputManagerSO playerInput;
     [SerializeField] private UIDocument uiDocument;
@@ -37,6 +39,7 @@ public class MainMenuManager : MonoBehaviour {
         }
 
         BuildMenu();
+        audio.PlaySFX(MusicFile.MenuChange);
     }
 
     private void HandleLeft() {
@@ -48,6 +51,7 @@ public class MainMenuManager : MonoBehaviour {
         }
 
         BuildMenu();
+        audio.PlaySFX(MusicFile.MenuChange);
     }
 
     private IEnumerator Start() {
@@ -66,7 +70,9 @@ public class MainMenuManager : MonoBehaviour {
     private void StartGame() {
         string language = selectedIndex == 0 ? "en" : "es";
         PlayerPrefs.SetString("playerLanguage", language);
+        db.ResetDatabase();
         gameManager.ChangeGameState(GameState.World);
+        audio.PlaySFX(MusicFile.MenuSelect);
     }
 
     private void BuildMenu() {

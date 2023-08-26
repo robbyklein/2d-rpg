@@ -135,12 +135,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio
       objectReference: {fileID: 0}
+    - target: {fileID: 1917237792581614772, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2801835447930377998, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
     - target: {fileID: 2801835447930377998, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
       propertyPath: initialSong
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845604265723222671, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845604265723222671, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6188025628806371398, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
@@ -253,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728c9eff9a5bf3643ab8d1301611fad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audio: {fileID: 1360695152}
+  db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
   gameManager: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
   playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
   uiDocument: {fileID: 593572834}
@@ -393,6 +407,17 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1360695152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2801835447930377998, guid: fb20f7df72e8b8b4ba92223070c32e22, type: 3}
+  m_PrefabInstance: {fileID: 569775054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8ab8b24185bf641bc4efbd99d0d517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1540529340
 PrefabInstance:
   m_ObjectHideFlags: 0

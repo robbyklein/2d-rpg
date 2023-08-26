@@ -7,7 +7,8 @@ public enum GameState {
     World,
     Pause,
     Inventory,
-    Battle
+    Battle,
+    GameOver,
 }
 
 [CreateAssetMenu(fileName = "Game Manager", menuName = "ScriptableObjects/Managers/GameManager")]
@@ -42,6 +43,7 @@ public class GameManagerSO : ScriptableObject {
     public void ChangeGameState(GameState state) {
         switch (state) {
             case GameState.MainMenu:
+                ChangeToMainMenu();
                 break;
             case GameState.Pause:
                 ChangeToPause();
@@ -55,9 +57,22 @@ public class GameManagerSO : ScriptableObject {
             case GameState.World:
                 ChangeToWorld();
                 break;
+            case GameState.GameOver:
+                ChangeToGameOver();
+                break;
         }
 
         onGameStateChange?.Invoke(state);
+    }
+
+    private void ChangeToGameOver() {
+        SceneManager.LoadSceneAsync("GameOver");
+        input.ChangeActionMap(PlayerInputActionMap.Menu);
+    }
+
+    private void ChangeToMainMenu() {
+        SceneManager.LoadSceneAsync("MainMenu");
+        input.ChangeActionMap(PlayerInputActionMap.Menu);
     }
 
     private void ChangeToWorld() {

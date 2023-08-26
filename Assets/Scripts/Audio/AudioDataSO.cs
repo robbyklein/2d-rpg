@@ -7,7 +7,11 @@ public enum MusicFile {
     World,
     Menu,
     Battle,
-    Boss
+    Boss,
+    GameOver,
+    Attack,
+    MenuChange,
+    MenuSelect,
 }
 
 [System.Serializable]
@@ -40,4 +44,9 @@ public class AudioDataSO : ScriptableObject {
     public AudioClip GetMusicClip(MusicFile key) {
         return musicClips[key];
     }
+
+    public AudioClip GetSFXClip(MusicFile key) {
+        return sfxClips[key];
+    }
+
 }

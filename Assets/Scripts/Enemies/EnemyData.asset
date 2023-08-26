@@ -13,21 +13,19 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   enemyInfos:
-  - Type: 0
-    Name: Cerberus
+  - Name: Cerberus
     Health: 50
     Defense: 12
-    Attack: 20
+    Attack: 2000
     Sprites:
     - {fileID: 21300000, guid: 7b5003f1c938a804a8c25728d3f30398, type: 3}
     - {fileID: 21300000, guid: bc2749f6e5a54a84cb59b4c89cabc01c, type: 3}
     - {fileID: 21300000, guid: e78e9f6ac378f9147b219a4aa0ca0fb9, type: 3}
     - {fileID: 21300000, guid: a23a7ced775ab28459e507d5c8cb8482, type: 3}
-  - Type: 1
-    Name: Cerberus
+  - Name: Cerberus
     Health: 100
     Defense: 10
-    Attack: 10
+    Attack: 1000
     Sprites:
     - {fileID: 21300000, guid: da88a6bcbf1706a409007e9a0a2949b3, type: 3}
     - {fileID: 21300000, guid: 283b986b48549674ab2c6128d296ecaa, type: 3}

@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-
 
 enum MessageType {
     DamageGiven,
@@ -224,7 +222,7 @@ public class BattleManager : MonoBehaviour {
             gameManager.ChangeGameState(GameState.World);
         }
         else if (playerStats.Health <= 0) {
-            Debug.Log("You lose");
+            gameManager.ChangeGameState(GameState.GameOver);
         }
 
     }

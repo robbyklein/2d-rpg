@@ -20,5 +20,13 @@ MonoBehaviour:
   - Key: 1
     Clip: {fileID: 8300000, guid: ef19b5c779e9c5246a9dce5deb5ae5ae, type: 3}
   - Key: 2
-    Clip: {fileID: 8300000, guid: 24eb445dc3d3e2c4298d917fc5457466, type: 3}
-  sfxClipsList: []
+    Clip: {fileID: 8300000, guid: 7461ef3386ae36e4cad2ce91f4a843a8, type: 3}
+  - Key: 4
+    Clip: {fileID: 8300000, guid: 6b269e0249c1667428ffc82a70d90d03, type: 3}
+  sfxClipsList:
+  - Key: 5
+    Clip: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
+  - Key: 6
+    Clip: {fileID: 8300000, guid: 490bfbc72255342408984f60044487de, type: 3}
+  - Key: 7
+    Clip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}

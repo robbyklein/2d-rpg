@@ -28,21 +28,6 @@ public class DatabaseSO : ScriptableObject {
     public Action OnPlayerDataUpdate;
     public Action OnPlayerInventoryUpdate;
 
-    private void OnEnable() {
-        filepath ??= Path.Combine(Application.persistentDataPath, "savefile.json");
-
-        DeleteData();
-
-        if (!File.Exists(filepath)) {
-            CreateSavefile();
-            SaveData();
-        }
-        else {
-            LoadData();
-        }
-
-    }
-
     #region Updaters
     public void UpdatePlayerData(PlayerData newCharacterData) {
         Data.PlayerData = newCharacterData;
@@ -67,6 +52,20 @@ public class DatabaseSO : ScriptableObject {
         Data.PlayerInventory.Add(potionEntry1);
 
         SaveData();
+    }
+
+    public void ResetDatabase() {
+        filepath ??= Path.Combine(Application.persistentDataPath, "savefile.json");
+
+        DeleteData();
+
+        if (!File.Exists(filepath)) {
+            CreateSavefile();
+            SaveData();
+        }
+        else {
+            LoadData();
+        }
     }
 
     private void SaveData() {

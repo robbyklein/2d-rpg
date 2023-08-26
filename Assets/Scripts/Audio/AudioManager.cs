@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
+    public static AudioManager Instance { get; private set; }
+
     // Data
     [SerializeField] private AudioDataSO data;
     [SerializeField] private GameManagerSO gameManager;
@@ -19,6 +21,17 @@ public class AudioManager : MonoBehaviour {
     private MusicFile currentMusic;
 
     #region Lifecycle
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private void OnEnable() {
         gameManager.onGameStateChange += HandleGameStateChange;
     }
@@ -32,6 +45,13 @@ public class AudioManager : MonoBehaviour {
         ChangeMusic(initialSong);
     }
     #endregion
+
+    public void PlaySFX(MusicFile sfx) {
+        AudioClip clip = data.GetSFXClip(sfx);
+        Debug.Log($"Trying to play one shot clip: {clip}");
+        Debug.Log($"Using source: {sfxSource}");
+        sfxSource.PlayOneShot(clip, 1f);
+    }
 
     public void ChangeMusic(MusicFile song) {
         if (currentMusic != song) {
@@ -93,6 +113,12 @@ public class AudioManager : MonoBehaviour {
                 break;
             case GameState.Battle:
                 ChangeMusic(MusicFile.Battle);
+                break;
+            case GameState.GameOver:
+                ChangeMusic(MusicFile.GameOver);
+                break;
+            case GameState.MainMenu:
+                ChangeMusic(MusicFile.Menu);
                 break;
         }
     }
