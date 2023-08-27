@@ -13,6 +13,7 @@ public enum DialogState {
 
 public class EntityDialog : MonoBehaviour, IInteractable {
     // Components
+    [SerializeField] private AudioManagerSO audioManager;
     [SerializeField] private LanguageSO language;
     [SerializeField] private PlayerInputManagerSO playerInputManager;
     [SerializeField] private UIDocument dialogUi;
@@ -122,6 +123,9 @@ public class EntityDialog : MonoBehaviour, IInteractable {
 
         // Is the conversation over?
         bool shouldEndConversation = activeDialogIndex == dialogs.Count;
+
+        // Play sound
+        audioManager.PlaySFX(SoundClip.MenuSelect);
 
         if (shouldEndConversation) {
             EndConversation();

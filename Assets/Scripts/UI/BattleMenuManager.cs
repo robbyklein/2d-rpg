@@ -10,6 +10,7 @@ public class BattleMenuManager : MonoBehaviour {
         Items
     }
 
+    [SerializeField] AudioManagerSO audioManager;
     [SerializeField] PlayerInputManagerSO playerInput;
     [SerializeField] private DatabaseSO db;
     [SerializeField] private KeyLanguageSO keyLanguage;
@@ -138,6 +139,8 @@ public class BattleMenuManager : MonoBehaviour {
     }
 
     private void HandleSelect() {
+        audioManager.PlaySFX(SoundClip.MenuSelect);
+
         if (selectedMenu == Menu.Main) {
             mainMenuOptions[selectedIndex].Action?.Invoke();
         }
@@ -152,11 +155,13 @@ public class BattleMenuManager : MonoBehaviour {
     }
 
     private void HandleDown() {
+        audioManager.PlaySFX(SoundClip.MenuChange);
         selectedIndex = (selectedIndex + 1) % mainMenuOptions.Count;
         BuildMenu();
     }
 
     private void HandleUp() {
+        audioManager.PlaySFX(SoundClip.MenuChange);
         selectedIndex = (selectedIndex + mainMenuOptions.Count - 1) % mainMenuOptions.Count;
         BuildMenu();
     }

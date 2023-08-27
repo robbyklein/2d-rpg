@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7701793bafec37499a25648870a27ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 11400000, guid: a42b7b521ac170f41af9909bcbe50f63, type: 2}
   gameManager: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
   keyLanguage: {fileID: 11400000, guid: ad0fa13897618364c833f5ad8c3a893d, type: 2}
   menuOptions:

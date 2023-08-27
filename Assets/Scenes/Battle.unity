@@ -81215,6 +81215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15da0e247bed9dc44a4f651c20b20e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 11400000, guid: a42b7b521ac170f41af9909bcbe50f63, type: 2}
   playerInput: {fileID: 11400000, guid: 3cae49c81f327cb4e969e08ebb7373d6, type: 2}
   db: {fileID: 11400000, guid: adeae58d642fdb3499712baabfab0b61, type: 2}
   keyLanguage: {fileID: 11400000, guid: ad0fa13897618364c833f5ad8c3a893d, type: 2}
@@ -81440,7 +81441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d073dff9f830b418da4cc7ff15c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyLanguage: {fileID: 11400000, guid: ad0fa13897618364c833f5ad8c3a893d, type: 2}
   manager: {fileID: 421625824}
   uiDocument: {fileID: 1744641410}
 --- !u!114 &1744641410

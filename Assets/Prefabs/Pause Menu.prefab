@@ -75,10 +75,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ca9ba208885c147a81bc620fbfd029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 11400000, guid: a42b7b521ac170f41af9909bcbe50f63, type: 2}
   keyLanguage: {fileID: 11400000, guid: ad0fa13897618364c833f5ad8c3a893d, type: 2}
   titleKey: pause
   menuOptions:
   - Key: inventory
+    Text: 
     Action:
       m_PersistentCalls:
         m_Calls:
@@ -95,6 +97,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - Key: resume
+    Text: 
     Action:
       m_PersistentCalls:
         m_Calls:
@@ -111,6 +114,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - Key: quit
+    Text: 
     Action:
       m_PersistentCalls:
         m_Calls:

@@ -13,6 +13,7 @@ struct GameOverOption {
 
 
 public class GameOverManager : MonoBehaviour {
+    [SerializeField] private AudioManagerSO audioManager;
     [SerializeField] private GameManagerSO gameManager;
     [SerializeField] private KeyLanguageSO keyLanguage;
     [SerializeField] private List<GameOverOption> menuOptions;
@@ -49,6 +50,7 @@ public class GameOverManager : MonoBehaviour {
             selectedIndex++;
         }
 
+        audioManager.PlaySFX(SoundClip.MenuChange);
         BuildMenu();
     }
 
@@ -60,11 +62,13 @@ public class GameOverManager : MonoBehaviour {
             selectedIndex--;
         }
 
+        audioManager.PlaySFX(SoundClip.MenuChange);
         BuildMenu();
     }
 
     private void HandleSelect() {
         menuOptions[selectedIndex].Action?.Invoke();
+        audioManager.PlaySFX(SoundClip.MenuSelect);
     }
 
     private void BuildMenu() {

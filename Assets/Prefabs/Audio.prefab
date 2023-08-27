@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6188025628806371398}
-  - component: {fileID: 5845604265723222671}
-  - component: {fileID: 1917237792581614772}
-  - component: {fileID: 2801835447930377998}
+  - component: {fileID: 2312176609580915412}
+  - component: {fileID: 3721229150217069775}
+  - component: {fileID: 7506748446832131895}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &5845604265723222671
+--- !u!82 &2312176609580915412
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &1917237792581614772
+--- !u!82 &3721229150217069775
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: -3
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -226,7 +226,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2801835447930377998
+--- !u!114 &7506748446832131895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,6 +240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4cf7c46cd515e80439414054be5a71b0, type: 2}
   gameManager: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
-  musicSource: {fileID: 5845604265723222671}
-  sfxSource: {fileID: 1917237792581614772}
-  initialSong: 2
+  musicSource: {fileID: 2312176609580915412}
+  sfxSource: {fileID: 3721229150217069775}
+  initialSong: 1

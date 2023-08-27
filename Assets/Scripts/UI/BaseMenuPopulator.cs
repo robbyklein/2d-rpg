@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public struct MenuOption {
     public string Key;
 
-    public string? Text;
+    public string Text;
     public ItemType? ItemType;
     public UnityEngine.Events.UnityEvent Action;
     public Action NormalAction;
@@ -16,6 +16,7 @@ public struct MenuOption {
 
 public abstract class BaseMenuPopulator : MonoBehaviour {
     // Fields
+    [SerializeField] protected AudioManagerSO audioManager;
     [SerializeField] protected KeyLanguageSO keyLanguage;
     [SerializeField] protected string titleKey;
     [SerializeField] protected List<MenuOption> menuOptions;
@@ -33,11 +34,13 @@ public abstract class BaseMenuPopulator : MonoBehaviour {
 
     protected void HandleOnPauseUp() {
         selectedIndex = (selectedIndex + menuOptions.Count - 1) % menuOptions.Count;
+        audioManager.PlaySFX(SoundClip.MenuChange);
         BuildMenu();
     }
 
     protected void HandleOnPauseDown() {
         selectedIndex = (selectedIndex + 1) % menuOptions.Count;
+        audioManager.PlaySFX(SoundClip.MenuChange);
         BuildMenu();
     }
 

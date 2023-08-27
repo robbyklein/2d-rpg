@@ -3,10 +3,12 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour {
+    [SerializeField] private AudioManagerSO audioManager;
     // Components
     [SerializeField] private UIDocument interactionDisplay;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerInputManagerSO inputManager;
+
     private BoxCollider2D coll;
 
     // Settings
@@ -17,6 +19,8 @@ public class PlayerInteract : MonoBehaviour {
     private bool uiBusy = false;
 
     private void OnEnable() {
+        // audioManager ??= FindObjectOfType<AudioManager>();
+
         inputManager.OnWorldInteract += HandleInteract;
         playerMovement.OnMovementDirectionChange += HandleMovementStateChange;
         EntityDialog.OnDialogBusy += HandleNpcBusyChange;
@@ -42,6 +46,8 @@ public class PlayerInteract : MonoBehaviour {
 
         if (interactableComponent != null) {
             interactableComponent.OnInteract();
+            audioManager.PlaySFX(SoundClip.MenuSelect);
+            // audioManager.PlaySFX(SoundClip.MenuSelect);
         }
     }
 

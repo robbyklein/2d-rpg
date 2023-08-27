@@ -64,6 +64,8 @@ public class InventoryPopulator : BaseMenuPopulator {
     }
 
     protected override void HandleSelect() {
+        audioManager.PlaySFX(SoundClip.MenuSelect);
+
         MenuOption selectedOption = menuOptions[selectedIndex];
 
         if (selectedOption.Action != null) {

@@ -55,7 +55,7 @@ public class DatabaseSO : ScriptableObject {
     }
 
     public void ResetDatabase() {
-        filepath ??= Path.Combine(Application.persistentDataPath, "savefile.json");
+        filepath = Path.Combine(Application.persistentDataPath, "savefile.json");
 
         DeleteData();
 

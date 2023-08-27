@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2db33932fa771ac4c8628397bc336a12, type: 3}
-  m_Name: AudioData
+  m_Name: AudioManager
   m_EditorClassIdentifier: 
-  musicClipsList:
+  gameManager: {fileID: 11400000, guid: 73c4ecaee37f3024ab752aabaf1a6b62, type: 2}
+  audioPlayerPrefab: {fileID: 8135702009951883594, guid: 7fecb7ab51cb99f46a940ec9b1a78b18, type: 3}
+  soundClipsList:
   - Key: 0
     Clip: {fileID: 8300000, guid: 5f021c5dfa765e142829bc9f68d14e9c, type: 3}
-  - Key: 3
-    Clip: {fileID: 8300000, guid: 24eb445dc3d3e2c4298d917fc5457466, type: 3}
   - Key: 1
     Clip: {fileID: 8300000, guid: ef19b5c779e9c5246a9dce5deb5ae5ae, type: 3}
   - Key: 2
     Clip: {fileID: 8300000, guid: 7461ef3386ae36e4cad2ce91f4a843a8, type: 3}
+  - Key: 3
+    Clip: {fileID: 8300000, guid: 24eb445dc3d3e2c4298d917fc5457466, type: 3}
   - Key: 4
     Clip: {fileID: 8300000, guid: 6b269e0249c1667428ffc82a70d90d03, type: 3}
-  sfxClipsList:
   - Key: 5
     Clip: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
   - Key: 6
-    Clip: {fileID: 8300000, guid: 490bfbc72255342408984f60044487de, type: 3}
+    Clip: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   - Key: 7
     Clip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}

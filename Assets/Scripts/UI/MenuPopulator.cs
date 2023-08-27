@@ -26,6 +26,7 @@ public class MenuPopulator : BaseMenuPopulator {
     }
 
     protected override void HandleSelect() {
+        audioManager.PlaySFX(SoundClip.MenuSelect);
         menuOptions[selectedIndex].Action?.Invoke();
     }
 }
