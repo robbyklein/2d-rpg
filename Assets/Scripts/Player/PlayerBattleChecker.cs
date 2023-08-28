@@ -46,7 +46,6 @@ public class PlayerBattleChecker : MonoBehaviour {
 
       if (playerIsMoving && playerInDangerousGround) {
         lastBattleDistance += 1;
-        Debug.Log(lastBattleDistance);
       }
 
       if (ShouldFightOccur()) {

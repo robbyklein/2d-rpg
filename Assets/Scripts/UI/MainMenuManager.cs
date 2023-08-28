@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MainMenuManager : MonoBehaviour {
+    private static bool initialMusicPlayed = false;
+
     [SerializeField] private AudioManagerSO audioManager;
     [SerializeField] private DatabaseSO db;
     [SerializeField] private GameManagerSO gameManager;
@@ -22,7 +24,10 @@ public class MainMenuManager : MonoBehaviour {
         playerInput.OnMenuRight += HandleRight;
         playerInput.OnMenuSelect += StartGame;
 
-        audioManager.ChangeMusic(SoundClip.Menu);
+        if (!initialMusicPlayed) {
+            initialMusicPlayed = true;
+            audioManager.ChangeMusic(SoundClip.Menu);
+        }
     }
 
     private void OnDisable() {

@@ -125,7 +125,7 @@ public class EntityDialog : MonoBehaviour, IInteractable {
         bool shouldEndConversation = activeDialogIndex == dialogs.Count;
 
         // Play sound
-        audioManager.PlaySFX(SoundClip.MenuSelect);
+        audioManager.PlaySFX(SoundClip.MenuChange);
 
         if (shouldEndConversation) {
             EndConversation();

@@ -19,8 +19,6 @@ public class AudioPlayer : MonoBehaviour {
     }
 
     public void ChangeMusic(AudioClip clip) {
-        Debug.Log("Change music has been called " + Source);
-
         StartCoroutine(ChangeMusicRoutine(clip));
     }
 
@@ -32,6 +30,7 @@ public class AudioPlayer : MonoBehaviour {
         Source.clip = clip;
         Source.volume = 0;
         Source.Play();
+        Source.loop = true;
 
         yield return StartCoroutine(FadeInMusicRoutine(1));
     }

@@ -16,6 +16,7 @@ enum MessageType {
 
 public class BattleManager : MonoBehaviour {
     #region Components
+    [SerializeField] private AudioManagerSO audioManager;
     [SerializeField] private KeyLanguageSO keyLanguage;
     [SerializeField] private BattleMenuManager menuManager;
     [SerializeField] private DatabaseSO db;
@@ -141,7 +142,6 @@ public class BattleManager : MonoBehaviour {
 
         // Did they miss?
         if (randomRoll <= 0.2) {
-            Debug.Log("Enemy Missed");
             OnDisplayMessage?.Invoke(CreateMessage(MessageType.EnemyMissed, 0));
         }
         else {
@@ -259,6 +259,8 @@ public class BattleManager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        audioManager.PlaySFX(SoundClip.Attack);
 
         elapsedTime = 0f;
         while (elapsedTime < duration) {
